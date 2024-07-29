@@ -1,0 +1,41 @@
+{
+  "name": "api",
+  "version": "1.0.0",
+  "description": "ini adalah bagian backend dari project sistem layanan ta dan kp",
+  "main": "src/main.js",
+  "type": "module",
+  "scripts": {
+    "test": "jest",
+    "start": "node src/main.js",
+    "dev": "nodemon src/main.js",
+    "build": "npm install && prisma generate"
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.[t|j]sx?$": "babel-jest"
+    }
+  },
+  "author": "agung wibowo and mentor",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/preset-env": "^7.25.0",
+    "@types/jest": "^29.5.12",
+    "babel-jest": "^29.7.0",
+    "jest": "^29.7.0",
+    "prisma": "^5.17.0"
+  },
+  "dependencies": {
+    "@prisma/client": "^5.17.0",
+    "bcrypt": "^5.1.1",
+    "body-parser": "^1.20.2",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "joi": "^17.13.3",
+    "jsonwebtoken": "^9.0.2",
+    "supertest": "^7.0.0",
+    "winston": "^3.13.1",
+    "winston-daily-rotate-file": "^5.0.0"
+  }
+}

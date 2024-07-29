@@ -1,0 +1,28 @@
+# SIMAK-TI (Sistem Informasi Manajemen Kerja Praktek dan Tugas Akhir Teknik Industri)
+
+## Introduction
+
+Ini adalah bagian backend dari sistem layanan kerja praktek dan tugas akhir teknik industri UMRI. Di backend ini saya menggunakan sistem REST API dengan menggunakan tech sebagai berikut :
+
+### Runtime
+
+- Node js
+
+### Main Freamwork / library
+
+- Express js
+
+### Library pendukung
+
+- Cors
+- Cookie-Parser
+- Body-Parser
+- dotenv
+- Express
+- Jwt
+- Bcrypt
+- Prisma
+
+## Documentation
+
+on development.......
