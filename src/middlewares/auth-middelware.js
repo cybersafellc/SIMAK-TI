@@ -16,6 +16,7 @@ const kordinator = async (req, res, next) => {
     if (decode.role !== "kordinator")
       throw new ResponseError(400, "kamu bukan kordinator");
     req.id = await decode.id;
+    req.role = await decode.role;
     next();
   } catch (error) {
     next(error);

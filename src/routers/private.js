@@ -6,6 +6,11 @@ const router = express.Router();
 router.post("/kordinators", kordinatorController.create);
 router.post("/kordinators/login", kordinatorController.login);
 router.get(
+  "/kordinators/token-verify",
+  authMiddelware.kordinator,
+  kordinatorController.tokenVerify
+);
+router.get(
   "/kordinators/profile",
   authMiddelware.kordinator,
   kordinatorController.profile

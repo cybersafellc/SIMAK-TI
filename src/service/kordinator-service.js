@@ -5,7 +5,6 @@ import validation from "../validations/validation.js";
 import crypto from "crypto";
 import bcrypt from "bcrypt";
 import { Response } from "../app/response.js";
-import { isPromise } from "util/types";
 import Jwt from "jsonwebtoken";
 
 const create = async (request) => {
@@ -70,6 +69,11 @@ const login = async (request) => {
   }
 };
 
+const tokenVerify = async (request) => {
+  const result = await validation(kordinatorValidation.tokenVerify, request);
+  return new Response(200, "access_token active", result, null, false);
+};
+
 const profile = async (request) => {
   const result = await validation(kordinatorValidation.profile, request);
   const kordinator = await database.kordinator.findFirst({
@@ -108,4 +112,4 @@ const getAll = async () => {
   return new Response(200, "kordinators", kordinators, null, false);
 };
 
-export default { create, login, profile, getAll };
+export default { create, login, profile, getAll, tokenVerify };

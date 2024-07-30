@@ -16,6 +16,16 @@ const login = async (req, res, next) => {
     next(error);
   }
 };
+const tokenVerify = async (req, res, next) => {
+  try {
+    req.body.id = await req.id;
+    req.body.role = await req.role;
+    const response = await kordinatorService.tokenVerify(req.body);
+    res.status(response.status).json(response).end();
+  } catch (error) {
+    next(error);
+  }
+};
 const profile = async (req, res, next) => {
   try {
     req.body.id = req.id;
@@ -33,4 +43,4 @@ const getAll = async (req, res, next) => {
     next(error);
   }
 };
-export default { create, login, profile, getAll };
+export default { create, login, profile, getAll, tokenVerify };

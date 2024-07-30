@@ -17,10 +17,10 @@ const errorHandler = async (err, req, res, next) => {
       return;
     }
     if (err instanceof ResponseError) {
-      const response = new Response(err.status, err.message, null, null, false);
+      const response = new Response(err.status, err.message, null, null, true);
       res.status(response.status).json(response).end();
     } else {
-      const response = new Response(500, err.message, null, null, false);
+      const response = new Response(500, err.message, null, null, true);
       res.status(response.status).json(response).end();
       logger.error(err.message);
     }
