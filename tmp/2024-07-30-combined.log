@@ -614,3 +614,115 @@
 {"level":"info","message":{"duration":0,"params":"[\"466f5b35-4ebd-4742-8310-e160e9fe8796\",1,0]","query":"SELECT `umri-teknik-industri`.`Kordinator`.`id`, `umri-teknik-industri`.`Kordinator`.`nama`, `umri-teknik-industri`.`Kordinator`.`no_hp`, `umri-teknik-industri`.`Kordinator`.`nidn`, `umri-teknik-industri`.`Kordinator`.`jabatan`, `umri-teknik-industri`.`Kordinator`.`username`, `umri-teknik-industri`.`Kordinator`.`email`, `umri-teknik-industri`.`Kordinator`.`status`, `umri-teknik-industri`.`Kordinator`.`remember_token` FROM `umri-teknik-industri`.`Kordinator` WHERE `umri-teknik-industri`.`Kordinator`.`id` = ? LIMIT ? OFFSET ?","target":"quaint::connector::metrics","timestamp":"2024-07-30T10:41:12.490Z"},"timestamp":"2024-07-30T10:41:12.490Z"}
 {"level":"info","message":{"duration":0,"params":"[]","query":"SELECT 1","target":"quaint::connector::metrics","timestamp":"2024-07-30T10:42:09.394Z"},"timestamp":"2024-07-30T10:42:09.394Z"}
 {"level":"info","message":{"duration":0,"params":"[]","query":"SELECT `umri-teknik-industri`.`Kordinator`.`id`, `umri-teknik-industri`.`Kordinator`.`nama`, `umri-teknik-industri`.`Kordinator`.`no_hp`, `umri-teknik-industri`.`Kordinator`.`nidn`, `umri-teknik-industri`.`Kordinator`.`jabatan`, `umri-teknik-industri`.`Kordinator`.`username`, `umri-teknik-industri`.`Kordinator`.`email`, `umri-teknik-industri`.`Kordinator`.`status`, `umri-teknik-industri`.`Kordinator`.`remember_token` FROM `umri-teknik-industri`.`Kordinator` WHERE 1=1","target":"quaint::connector::metrics","timestamp":"2024-07-30T10:42:09.395Z"},"timestamp":"2024-07-30T10:42:09.395Z"}
+{"level":"info","message":"Server Running on Port : 3001","timestamp":"2024-07-30T11:06:21.693Z"}
+{"level":"info","message":"Server Running on Port : 3001","timestamp":"2024-07-30T11:06:36.805Z"}
+{"level":"info","message":"Server Running on Port : 3001","timestamp":"2024-07-30T11:06:47.378Z"}
+{"level":"info","message":"Server Running on Port : 3001","timestamp":"2024-07-30T11:07:36.608Z"}
+{"level":"info","message":"Server Running on Port : 3001","timestamp":"2024-07-30T11:08:04.722Z"}
+{"level":"info","message":"Server Running on Port : 3001","timestamp":"2024-07-30T11:08:15.491Z"}
+{"level":"info","message":"Server Running on Port : 3001","timestamp":"2024-07-30T11:08:27.200Z"}
+{"level":"info","message":"Server Running on Port : 3001","timestamp":"2024-07-30T11:09:09.311Z"}
+{"level":"info","message":"Server Running on Port : 3001","timestamp":"2024-07-30T11:09:33.530Z"}
+{"level":"info","message":"Server Running on Port : 3001","timestamp":"2024-07-30T11:09:44.716Z"}
+{"level":"info","message":"Server Running on Port : 3001","timestamp":"2024-07-30T11:09:52.060Z"}
+{"level":"info","message":"Server Running on Port : 3001","timestamp":"2024-07-30T11:10:00.269Z"}
+{"level":"info","message":"Server Running on Port : 3001","timestamp":"2024-07-30T11:10:50.625Z"}
+{"level":"info","message":"Server Running on Port : 3001","timestamp":"2024-07-30T11:11:37.346Z"}
+{"level":"info","message":"Server Running on Port : 3001","timestamp":"2024-07-30T11:11:54.316Z"}
+{"level":"info","message":"Server Running on Port : 3001","timestamp":"2024-07-30T11:12:17.666Z"}
+{"level":"info","message":"Server Running on Port : 3001","timestamp":"2024-07-30T11:12:35.016Z"}
+{"level":"info","message":"Server Running on Port : 3001","timestamp":"2024-07-30T11:13:21.524Z"}
+{"level":"info","message":"Server Running on Port : 3001","timestamp":"2024-07-30T11:13:25.456Z"}
+{"level":"info","message":"Server Running on Port : 3001","timestamp":"2024-07-30T11:13:38.779Z"}
+{"level":"info","message":"Server Running on Port : 3001","timestamp":"2024-07-30T11:13:41.307Z"}
+{"level":"info","message":"Server Running on Port : 3001","timestamp":"2024-07-30T11:13:53.414Z"}
+{"level":"info","message":"Server Running on Port : 3001","timestamp":"2024-07-30T11:14:13.644Z"}
+{"level":"info","message":"Server Running on Port : 3001","timestamp":"2024-07-30T11:14:38.835Z"}
+{"level":"info","message":"Server Running on Port : 3001","timestamp":"2024-07-30T11:14:41.404Z"}
+{"level":"info","message":"Server Running on Port : 3001","timestamp":"2024-07-30T11:15:05.270Z"}
+{"level":"info","message":"Server Running on Port : 3001","timestamp":"2024-07-30T11:15:05.959Z"}
+{"level":"info","message":"Server Running on Port : 3001","timestamp":"2024-07-30T11:15:12.175Z"}
+{"level":"info","message":"Server Running on Port : 3001","timestamp":"2024-07-30T11:15:32.066Z"}
+{"level":"info","message":"Server Running on Port : 3001","timestamp":"2024-07-30T11:15:45.312Z"}
+{"level":"info","message":"Server Running on Port : 3001","timestamp":"2024-07-30T11:16:08.784Z"}
+{"level":"info","message":"Server Running on Port : 3001","timestamp":"2024-07-30T11:16:28.483Z"}
+{"level":"info","message":"Server Running on Port : 3001","timestamp":"2024-07-30T11:16:54.596Z"}
+{"level":"info","message":"Server Running on Port : 3001","timestamp":"2024-07-30T11:17:09.433Z"}
+{"level":"info","message":"Server Running on Port : 3001","timestamp":"2024-07-30T11:17:14.122Z"}
+{"level":"info","message":"Server Running on Port : 3001","timestamp":"2024-07-30T11:17:34.554Z"}
+{"level":"info","message":"Server Running on Port : 3001","timestamp":"2024-07-30T11:17:45.539Z"}
+{"level":"info","message":"Server Running on Port : 3001","timestamp":"2024-07-30T11:17:50.351Z"}
+{"level":"info","message":"Server Running on Port : 3001","timestamp":"2024-07-30T11:18:00.435Z"}
+{"level":"info","message":"Server Running on Port : 3001","timestamp":"2024-07-30T11:18:46.599Z"}
+{"level":"info","message":"Starting a mysql pool with 13 connections.","target":"quaint::pooled","timestamp":"2024-07-30T11:29:17.748Z"}
+{"level":"info","message":{"duration":10,"params":"[\"200103093\"]","query":"SELECT COUNT(*) FROM (SELECT `umri-teknik-industri`.`Mahasiswa`.`id` FROM `umri-teknik-industri`.`Mahasiswa` WHERE `umri-teknik-industri`.`Mahasiswa`.`username` = ?) AS `sub`","target":"quaint::connector::metrics","timestamp":"2024-07-30T11:29:17.764Z"},"timestamp":"2024-07-30T11:29:17.764Z"}
+{"level":"info","message":{"duration":0,"params":"[]","query":"BEGIN","target":"quaint::connector::metrics","timestamp":"2024-07-30T11:29:17.822Z"},"timestamp":"2024-07-30T11:29:17.822Z"}
+{"level":"info","message":{"duration":0,"params":"[\"3e35605f-9aa9-48d5-8b3c-7fd76616d152\",\"agung wibowo\",\"200103093\",\"+6281277000291\",\"test\",\"200103093\",\"$2b$10$DdapRbIwYAEfYSlis7oK9uA2497V8XSOWdAMrwCdt9tmHJlc6NUkO\",\"agungslaw@gmail.com\",\"active\",\"\",\"2024-07-30 11:29:17.822 UTC\",\"2024-07-30 11:29:17.822 UTC\"]","query":"INSERT INTO `umri-teknik-industri`.`Mahasiswa` (`id`,`nama`,`nim`,`no_hp`,`pembimbing_akademik`,`username`,`password`,`email`,`status`,`remember_token`,`created_at`,`update_at`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)","target":"quaint::connector::metrics","timestamp":"2024-07-30T11:29:17.823Z"},"timestamp":"2024-07-30T11:29:17.823Z"}
+{"level":"info","message":{"duration":0,"params":"[\"3e35605f-9aa9-48d5-8b3c-7fd76616d152\",1,0]","query":"SELECT `umri-teknik-industri`.`Mahasiswa`.`id`, `umri-teknik-industri`.`Mahasiswa`.`nama`, `umri-teknik-industri`.`Mahasiswa`.`nim`, `umri-teknik-industri`.`Mahasiswa`.`no_hp`, `umri-teknik-industri`.`Mahasiswa`.`pembimbing_akademik`, `umri-teknik-industri`.`Mahasiswa`.`username`, `umri-teknik-industri`.`Mahasiswa`.`password`, `umri-teknik-industri`.`Mahasiswa`.`email`, `umri-teknik-industri`.`Mahasiswa`.`status`, `umri-teknik-industri`.`Mahasiswa`.`remember_token`, `umri-teknik-industri`.`Mahasiswa`.`created_at`, `umri-teknik-industri`.`Mahasiswa`.`update_at` FROM `umri-teknik-industri`.`Mahasiswa` WHERE `umri-teknik-industri`.`Mahasiswa`.`id` = ? LIMIT ? OFFSET ?","target":"quaint::connector::metrics","timestamp":"2024-07-30T11:29:17.824Z"},"timestamp":"2024-07-30T11:29:17.824Z"}
+{"level":"info","message":{"duration":0,"params":"[]","query":"COMMIT","target":"quaint::connector::metrics","timestamp":"2024-07-30T11:29:17.824Z"},"timestamp":"2024-07-30T11:29:17.824Z"}
+{"level":"info","message":{"duration":0,"params":"[\"200103093\"]","query":"SELECT COUNT(*) FROM (SELECT `umri-teknik-industri`.`Mahasiswa`.`id` FROM `umri-teknik-industri`.`Mahasiswa` WHERE `umri-teknik-industri`.`Mahasiswa`.`username` = ?) AS `sub`","target":"quaint::connector::metrics","timestamp":"2024-07-30T11:29:20.303Z"},"timestamp":"2024-07-30T11:29:20.303Z"}
+{"level":"info","message":"Server Running on Port : 3001","timestamp":"2024-07-30T11:31:25.006Z"}
+{"level":"info","message":"Starting a mysql pool with 13 connections.","target":"quaint::pooled","timestamp":"2024-07-30T11:32:56.090Z"}
+{"level":"info","message":{"duration":0,"params":"[\"123412341234\",1,0]","query":"SELECT `umri-teknik-industri`.`Kordinator`.`id`, `umri-teknik-industri`.`Kordinator`.`nama`, `umri-teknik-industri`.`Kordinator`.`no_hp`, `umri-teknik-industri`.`Kordinator`.`nidn`, `umri-teknik-industri`.`Kordinator`.`jabatan`, `umri-teknik-industri`.`Kordinator`.`username`, `umri-teknik-industri`.`Kordinator`.`password`, `umri-teknik-industri`.`Kordinator`.`email`, `umri-teknik-industri`.`Kordinator`.`status`, `umri-teknik-industri`.`Kordinator`.`remember_token`, `umri-teknik-industri`.`Kordinator`.`created_at`, `umri-teknik-industri`.`Kordinator`.`update_at` FROM `umri-teknik-industri`.`Kordinator` WHERE `umri-teknik-industri`.`Kordinator`.`username` = ? LIMIT ? OFFSET ?","target":"quaint::connector::metrics","timestamp":"2024-07-30T11:32:56.095Z"},"timestamp":"2024-07-30T11:32:56.095Z"}
+{"level":"info","message":{"duration":0,"params":"[]","query":"BEGIN","target":"quaint::connector::metrics","timestamp":"2024-07-30T11:32:56.155Z"},"timestamp":"2024-07-30T11:32:56.155Z"}
+{"level":"info","message":{"duration":0,"params":"[\"466f5b35-4ebd-4742-8310-e160e9fe8796\"]","query":"SELECT `umri-teknik-industri`.`Kordinator`.`id` FROM `umri-teknik-industri`.`Kordinator` WHERE (`umri-teknik-industri`.`Kordinator`.`id` = ? AND 1=1)","target":"quaint::connector::metrics","timestamp":"2024-07-30T11:32:56.156Z"},"timestamp":"2024-07-30T11:32:56.156Z"}
+{"level":"info","message":{"duration":1,"params":"[\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjQ2NmY1YjM1LTRlYmQtNDc0Mi04MzEwLWUxNjBlOWZlODc5NiIsInJvbGUiOiJrb3JkaW5hdG9yIiwiaWF0IjoxNzIyMzM5MTc2LCJleHAiOjE3MjI5NDM5NzZ9.mbVibYnaLenAkYyIHaaRG7tTzOtcr79as_VmQLH27c0\",\"2024-07-30 11:32:56.156 UTC\",\"466f5b35-4ebd-4742-8310-e160e9fe8796\",\"466f5b35-4ebd-4742-8310-e160e9fe8796\"]","query":"UPDATE `umri-teknik-industri`.`Kordinator` SET `remember_token` = ?, `update_at` = ? WHERE (`umri-teknik-industri`.`Kordinator`.`id` IN (?) AND (`umri-teknik-industri`.`Kordinator`.`id` = ? AND 1=1))","target":"quaint::connector::metrics","timestamp":"2024-07-30T11:32:56.157Z"},"timestamp":"2024-07-30T11:32:56.157Z"}
+{"level":"info","message":{"duration":0,"params":"[\"466f5b35-4ebd-4742-8310-e160e9fe8796\",1,0]","query":"SELECT `umri-teknik-industri`.`Kordinator`.`id`, `umri-teknik-industri`.`Kordinator`.`nama`, `umri-teknik-industri`.`Kordinator`.`no_hp`, `umri-teknik-industri`.`Kordinator`.`nidn`, `umri-teknik-industri`.`Kordinator`.`jabatan`, `umri-teknik-industri`.`Kordinator`.`username`, `umri-teknik-industri`.`Kordinator`.`password`, `umri-teknik-industri`.`Kordinator`.`email`, `umri-teknik-industri`.`Kordinator`.`status`, `umri-teknik-industri`.`Kordinator`.`remember_token`, `umri-teknik-industri`.`Kordinator`.`created_at`, `umri-teknik-industri`.`Kordinator`.`update_at` FROM `umri-teknik-industri`.`Kordinator` WHERE `umri-teknik-industri`.`Kordinator`.`id` = ? LIMIT ? OFFSET ?","target":"quaint::connector::metrics","timestamp":"2024-07-30T11:32:56.157Z"},"timestamp":"2024-07-30T11:32:56.157Z"}
+{"level":"info","message":{"duration":0,"params":"[]","query":"COMMIT","target":"quaint::connector::metrics","timestamp":"2024-07-30T11:32:56.158Z"},"timestamp":"2024-07-30T11:32:56.158Z"}
+{"level":"info","message":"Server Running on Port : 3001","timestamp":"2024-07-30T11:41:11.222Z"}
+{"level":"info","message":"Server Running on Port : 3001","timestamp":"2024-07-30T11:42:34.380Z"}
+{"level":"info","message":"Server Running on Port : 3001","timestamp":"2024-07-30T11:42:45.595Z"}
+{"level":"info","message":"Server Running on Port : 3001","timestamp":"2024-07-30T11:42:51.869Z"}
+{"level":"info","message":"Server Running on Port : 3001","timestamp":"2024-07-30T11:43:18.970Z"}
+{"level":"info","message":"Server Running on Port : 3001","timestamp":"2024-07-30T11:43:50.702Z"}
+{"level":"info","message":"Server Running on Port : 3001","timestamp":"2024-07-30T11:43:57.471Z"}
+{"level":"info","message":"Server Running on Port : 3001","timestamp":"2024-07-30T11:44:33.607Z"}
+{"level":"info","message":"Server Running on Port : 3001","timestamp":"2024-07-30T11:47:35.356Z"}
+{"level":"info","message":"Server Running on Port : 3001","timestamp":"2024-07-30T11:47:35.907Z"}
+{"level":"info","message":"Server Running on Port : 3001","timestamp":"2024-07-30T11:48:06.630Z"}
+{"level":"info","message":"Server Running on Port : 3001","timestamp":"2024-07-30T11:48:09.791Z"}
+{"level":"info","message":"Server Running on Port : 3001","timestamp":"2024-07-30T11:48:15.377Z"}
+{"level":"info","message":"Server Running on Port : 3001","timestamp":"2024-07-30T11:48:54.293Z"}
+{"level":"info","message":"Server Running on Port : 3001","timestamp":"2024-07-30T11:49:58.836Z"}
+{"level":"info","message":"Server Running on Port : 3001","timestamp":"2024-07-30T11:50:12.483Z"}
+{"level":"info","message":"Server Running on Port : 3001","timestamp":"2024-07-30T11:50:16.797Z"}
+{"level":"info","message":"Server Running on Port : 3001","timestamp":"2024-07-30T11:50:41.716Z"}
+{"level":"info","message":"Server Running on Port : 3001","timestamp":"2024-07-30T11:50:48.129Z"}
+{"level":"info","message":"Starting a mysql pool with 13 connections.","target":"quaint::pooled","timestamp":"2024-07-30T11:51:33.872Z"}
+{"level":"info","message":{"duration":0,"params":"[\"200103093\",1,0]","query":"SELECT `umri-teknik-industri`.`Mahasiswa`.`id`, `umri-teknik-industri`.`Mahasiswa`.`nama`, `umri-teknik-industri`.`Mahasiswa`.`nim`, `umri-teknik-industri`.`Mahasiswa`.`no_hp`, `umri-teknik-industri`.`Mahasiswa`.`pembimbing_akademik`, `umri-teknik-industri`.`Mahasiswa`.`username`, `umri-teknik-industri`.`Mahasiswa`.`password`, `umri-teknik-industri`.`Mahasiswa`.`email`, `umri-teknik-industri`.`Mahasiswa`.`status`, `umri-teknik-industri`.`Mahasiswa`.`remember_token`, `umri-teknik-industri`.`Mahasiswa`.`created_at`, `umri-teknik-industri`.`Mahasiswa`.`update_at` FROM `umri-teknik-industri`.`Mahasiswa` WHERE `umri-teknik-industri`.`Mahasiswa`.`username` = ? LIMIT ? OFFSET ?","target":"quaint::connector::metrics","timestamp":"2024-07-30T11:51:33.878Z"},"timestamp":"2024-07-30T11:51:33.878Z"}
+{"level":"info","message":{"duration":0,"params":"[\"200103093\",1,0]","query":"SELECT `umri-teknik-industri`.`Mahasiswa`.`id`, `umri-teknik-industri`.`Mahasiswa`.`nama`, `umri-teknik-industri`.`Mahasiswa`.`nim`, `umri-teknik-industri`.`Mahasiswa`.`no_hp`, `umri-teknik-industri`.`Mahasiswa`.`pembimbing_akademik`, `umri-teknik-industri`.`Mahasiswa`.`username`, `umri-teknik-industri`.`Mahasiswa`.`password`, `umri-teknik-industri`.`Mahasiswa`.`email`, `umri-teknik-industri`.`Mahasiswa`.`status`, `umri-teknik-industri`.`Mahasiswa`.`remember_token`, `umri-teknik-industri`.`Mahasiswa`.`created_at`, `umri-teknik-industri`.`Mahasiswa`.`update_at` FROM `umri-teknik-industri`.`Mahasiswa` WHERE `umri-teknik-industri`.`Mahasiswa`.`username` = ? LIMIT ? OFFSET ?","target":"quaint::connector::metrics","timestamp":"2024-07-30T11:51:37.233Z"},"timestamp":"2024-07-30T11:51:37.233Z"}
+{"level":"info","message":{"duration":0,"params":"[]","query":"SELECT 1","target":"quaint::connector::metrics","timestamp":"2024-07-30T11:52:27.891Z"},"timestamp":"2024-07-30T11:52:27.891Z"}
+{"level":"info","message":{"duration":0,"params":"[\"200103093s\",1,0]","query":"SELECT `umri-teknik-industri`.`Mahasiswa`.`id`, `umri-teknik-industri`.`Mahasiswa`.`nama`, `umri-teknik-industri`.`Mahasiswa`.`nim`, `umri-teknik-industri`.`Mahasiswa`.`no_hp`, `umri-teknik-industri`.`Mahasiswa`.`pembimbing_akademik`, `umri-teknik-industri`.`Mahasiswa`.`username`, `umri-teknik-industri`.`Mahasiswa`.`password`, `umri-teknik-industri`.`Mahasiswa`.`email`, `umri-teknik-industri`.`Mahasiswa`.`status`, `umri-teknik-industri`.`Mahasiswa`.`remember_token`, `umri-teknik-industri`.`Mahasiswa`.`created_at`, `umri-teknik-industri`.`Mahasiswa`.`update_at` FROM `umri-teknik-industri`.`Mahasiswa` WHERE `umri-teknik-industri`.`Mahasiswa`.`username` = ? LIMIT ? OFFSET ?","target":"quaint::connector::metrics","timestamp":"2024-07-30T11:52:27.892Z"},"timestamp":"2024-07-30T11:52:27.892Z"}
+{"level":"info","message":{"duration":0,"params":"[\"200103093\",1,0]","query":"SELECT `umri-teknik-industri`.`Mahasiswa`.`id`, `umri-teknik-industri`.`Mahasiswa`.`nama`, `umri-teknik-industri`.`Mahasiswa`.`nim`, `umri-teknik-industri`.`Mahasiswa`.`no_hp`, `umri-teknik-industri`.`Mahasiswa`.`pembimbing_akademik`, `umri-teknik-industri`.`Mahasiswa`.`username`, `umri-teknik-industri`.`Mahasiswa`.`password`, `umri-teknik-industri`.`Mahasiswa`.`email`, `umri-teknik-industri`.`Mahasiswa`.`status`, `umri-teknik-industri`.`Mahasiswa`.`remember_token`, `umri-teknik-industri`.`Mahasiswa`.`created_at`, `umri-teknik-industri`.`Mahasiswa`.`update_at` FROM `umri-teknik-industri`.`Mahasiswa` WHERE `umri-teknik-industri`.`Mahasiswa`.`username` = ? LIMIT ? OFFSET ?","target":"quaint::connector::metrics","timestamp":"2024-07-30T11:52:35.608Z"},"timestamp":"2024-07-30T11:52:35.608Z"}
+{"level":"info","message":{"duration":0,"params":"[\"200103093\",1,0]","query":"SELECT `umri-teknik-industri`.`Mahasiswa`.`id`, `umri-teknik-industri`.`Mahasiswa`.`nama`, `umri-teknik-industri`.`Mahasiswa`.`nim`, `umri-teknik-industri`.`Mahasiswa`.`no_hp`, `umri-teknik-industri`.`Mahasiswa`.`pembimbing_akademik`, `umri-teknik-industri`.`Mahasiswa`.`username`, `umri-teknik-industri`.`Mahasiswa`.`password`, `umri-teknik-industri`.`Mahasiswa`.`email`, `umri-teknik-industri`.`Mahasiswa`.`status`, `umri-teknik-industri`.`Mahasiswa`.`remember_token`, `umri-teknik-industri`.`Mahasiswa`.`created_at`, `umri-teknik-industri`.`Mahasiswa`.`update_at` FROM `umri-teknik-industri`.`Mahasiswa` WHERE `umri-teknik-industri`.`Mahasiswa`.`username` = ? LIMIT ? OFFSET ?","target":"quaint::connector::metrics","timestamp":"2024-07-30T11:52:39.286Z"},"timestamp":"2024-07-30T11:52:39.286Z"}
+{"level":"info","message":"Server Running on Port : 3001","timestamp":"2024-07-30T11:54:34.626Z"}
+{"level":"info","message":"Server Running on Port : 3001","timestamp":"2024-07-30T11:54:41.162Z"}
+{"level":"info","message":"Server Running on Port : 3001","timestamp":"2024-07-30T11:55:21.847Z"}
+{"level":"info","message":"Server Running on Port : 3001","timestamp":"2024-07-30T11:55:22.202Z"}
+{"level":"info","message":"Server Running on Port : 3001","timestamp":"2024-07-30T11:56:32.106Z"}
+{"level":"info","message":"Server Running on Port : 3001","timestamp":"2024-07-30T11:57:08.557Z"}
+{"level":"info","message":"Server Running on Port : 3001","timestamp":"2024-07-30T11:57:14.430Z"}
+{"level":"info","message":"Server Running on Port : 3001","timestamp":"2024-07-30T11:58:03.280Z"}
+{"level":"info","message":"Server Running on Port : 3001","timestamp":"2024-07-30T11:58:13.307Z"}
+{"level":"info","message":"Server Running on Port : 3001","timestamp":"2024-07-30T11:58:20.291Z"}
+{"level":"info","message":"Server Running on Port : 3001","timestamp":"2024-07-30T11:59:27.948Z"}
+{"level":"info","message":"Server Running on Port : 3001","timestamp":"2024-07-30T11:59:28.735Z"}
+{"level":"info","message":"Server Running on Port : 3001","timestamp":"2024-07-30T11:59:33.030Z"}
+{"level":"info","message":"Server Running on Port : 3001","timestamp":"2024-07-30T12:00:01.786Z"}
+{"level":"info","message":"Server Running on Port : 3001","timestamp":"2024-07-30T12:00:10.788Z"}
+{"level":"info","message":"Server Running on Port : 3001","timestamp":"2024-07-30T12:00:19.820Z"}
+{"level":"info","message":"Server Running on Port : 3001","timestamp":"2024-07-30T12:01:16.068Z"}
+{"level":"info","message":"Server Running on Port : 3001","timestamp":"2024-07-30T12:01:52.608Z"}
+{"level":"info","message":"Server Running on Port : 3001","timestamp":"2024-07-30T12:01:56.407Z"}
+{"level":"info","message":"Server Running on Port : 3001","timestamp":"2024-07-30T12:02:06.867Z"}
+{"level":"info","message":"Server Running on Port : 3001","timestamp":"2024-07-30T12:02:27.182Z"}
+{"level":"info","message":"Server Running on Port : 3001","timestamp":"2024-07-30T12:02:36.826Z"}
+{"level":"info","message":"Server Running on Port : 3001","timestamp":"2024-07-30T12:03:01.147Z"}
+{"level":"info","message":"Starting a mysql pool with 13 connections.","target":"quaint::pooled","timestamp":"2024-07-30T12:03:42.606Z"}
+{"level":"info","message":{"duration":0,"params":"[\"200103093\",1,0]","query":"SELECT `umri-teknik-industri`.`Mahasiswa`.`id`, `umri-teknik-industri`.`Mahasiswa`.`nama`, `umri-teknik-industri`.`Mahasiswa`.`nim`, `umri-teknik-industri`.`Mahasiswa`.`no_hp`, `umri-teknik-industri`.`Mahasiswa`.`pembimbing_akademik`, `umri-teknik-industri`.`Mahasiswa`.`username`, `umri-teknik-industri`.`Mahasiswa`.`password`, `umri-teknik-industri`.`Mahasiswa`.`email`, `umri-teknik-industri`.`Mahasiswa`.`status`, `umri-teknik-industri`.`Mahasiswa`.`remember_token`, `umri-teknik-industri`.`Mahasiswa`.`created_at`, `umri-teknik-industri`.`Mahasiswa`.`update_at` FROM `umri-teknik-industri`.`Mahasiswa` WHERE `umri-teknik-industri`.`Mahasiswa`.`username` = ? LIMIT ? OFFSET ?","target":"quaint::connector::metrics","timestamp":"2024-07-30T12:03:42.612Z"},"timestamp":"2024-07-30T12:03:42.613Z"}
+{"level":"info","message":"Server Running on Port : 3001","timestamp":"2024-07-30T12:04:34.319Z"}
+{"level":"info","message":"Server Running on Port : 3001","timestamp":"2024-07-30T12:04:46.203Z"}
+{"level":"info","message":"Server Running on Port : 3001","timestamp":"2024-07-30T12:04:56.186Z"}
+{"level":"info","message":"Server Running on Port : 3001","timestamp":"2024-07-30T12:05:10.943Z"}
+{"level":"info","message":"Server Running on Port : 3001","timestamp":"2024-07-30T12:08:55.024Z"}
+{"level":"info","message":"Server Running on Port : 3001","timestamp":"2024-07-30T14:34:41.487Z"}
