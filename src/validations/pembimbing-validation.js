@@ -2,9 +2,9 @@ import Joi from "joi";
 
 const create = Joi.object({
   nama: Joi.string().required(),
-  nim: Joi.string().required(),
   no_hp: Joi.string().required(),
-  pembimbing_akademik: Joi.string().required(),
+  nidn: Joi.string().required(),
+  jabatan: Joi.string().required(),
   password: Joi.string().required(),
   email: Joi.string().required(),
 });
@@ -23,8 +23,8 @@ const profile = Joi.object({
   id: Joi.string().required(),
 });
 
-const getAll = Joi.object({
+const getAllPublic = Joi.object({
   page: Joi.number().optional(),
 });
 
-export default { create, login, tokenVerify, profile, getAll };
+export default { create, login, tokenVerify, profile, getAllPublic };

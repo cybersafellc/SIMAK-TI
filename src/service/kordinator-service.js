@@ -29,6 +29,11 @@ const create = async (request) => {
   result.remember_token = "";
   const responseCreate = await database.kordinator.create({
     data: result,
+    select: {
+      id: true,
+      username: true,
+      created_at: true,
+    },
   });
   return new Response(
     200,
@@ -95,7 +100,10 @@ const profile = async (request) => {
   return new Response(200, "profile", kordinator, null, false);
 };
 
-const getAll = async () => {
+const getAll = async (request) => {
+  const result = await validation(kordinatorValidation.getAll, request);
+  result.page = result.page - 1;
+  result.page = result.page * 30;
   const kordinators = await database.kordinator.findMany({
     select: {
       id: true,
@@ -108,6 +116,11 @@ const getAll = async () => {
       status: true,
       remember_token: true,
     },
+    orderBy: {
+      created_at: "desc",
+    },
+    skip: result.page,
+    take: 30,
   });
   return new Response(200, "kordinators", kordinators, null, false);
 };

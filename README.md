@@ -27,4 +27,5 @@ Ini adalah bagian backend dari sistem layanan kerja praktek dan tugas akhir tekn
 
 - [Kordinator Service](https://github.com/cybersafellc/SIMAK-TI/blob/main/docs/kordinator.md)
 - [Mahasiswa Service](https://github.com/cybersafellc/SIMAK-TI/blob/main/docs/mahasiswa.md)
+- [Pembimbing Service](https://github.com/cybersafellc/SIMAK-TI/blob/main/docs/pembimbing.md)
   on development.......

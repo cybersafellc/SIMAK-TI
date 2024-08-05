@@ -37,7 +37,8 @@ const profile = async (req, res, next) => {
 };
 const getAll = async (req, res, next) => {
   try {
-    const response = await kordinatorService.getAll();
+    req.body.page = req.query.page || 1;
+    const response = await kordinatorService.getAll(req.body);
     res.status(response.status).json(response).end();
   } catch (error) {
     next(error);

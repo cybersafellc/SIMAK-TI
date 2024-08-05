@@ -24,4 +24,8 @@ const profile = Joi.object({
   id: Joi.string().required(),
 });
 
-export default { create, login, tokenVerify, profile };
+const getAll = Joi.object({
+  page: Joi.number().optional(),
+});
+
+export default { create, login, tokenVerify, profile, getAll };

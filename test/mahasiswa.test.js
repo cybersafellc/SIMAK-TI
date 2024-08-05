@@ -2,6 +2,10 @@ import supertest from "supertest";
 import { createMahasiswa, deleteMahasiswa } from "./utils/mahasiswa-utils.js";
 import { logger } from "../src/app/logging.js";
 import { web } from "../src/app/web.js";
+import {
+  createKordinator,
+  deleteKordinator,
+} from "./utils/kordinator-utils.js";
 
 describe("POST : /mahasiswa", () => {
   afterEach(async () => {
@@ -163,6 +167,32 @@ describe("GET : /mahasiswa/profile", () => {
 
     const response = await supertest(web)
       .get("/mahasiswa/profile")
+      .set("Authorization", `Bearer ${login.body.data.access_token}`);
+    logger.info(response.body);
+    expect(response.status).toBe(200);
+    expect(response.body.error).toBe(false);
+  });
+});
+
+describe("GET : /mahasiswa", () => {
+  beforeEach(async () => {
+    await createKordinator();
+  });
+  afterEach(async () => {
+    await deleteKordinator();
+  });
+
+  it("berhasil mendapatkan list semua mahasiswa", async () => {
+    const login = await supertest(web).post("/kordinators/login").send({
+      username: "testing",
+      password: "testing",
+    });
+    expect(login.status).toBe(200);
+    expect(login.body.error).toBe(false);
+    expect(login.body.data.access_token).toBeDefined();
+
+    const response = await supertest(web)
+      .get("/mahasiswa")
       .set("Authorization", `Bearer ${login.body.data.access_token}`);
     logger.info(response.body);
     expect(response.status).toBe(200);
