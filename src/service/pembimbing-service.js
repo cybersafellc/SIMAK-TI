@@ -96,7 +96,7 @@ const getAllPublic = async (request) => {
   result.page = result.page * 30;
   const pembimbings = await database.pembimbing.findMany({
     orderBy: {
-      created_at: "desc",
+      nama: "desc",
     },
     skip: result.page,
     take: 30,

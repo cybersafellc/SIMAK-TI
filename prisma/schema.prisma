@@ -7,157 +7,222 @@ generator client {
   provider = "prisma-client-js"
 }
 
-model Kordinator {
+model kordinator {
   id             String   @id @default(uuid()) @db.VarChar(100)
-  nama           String   @db.VarChar(255)
-  no_hp          String   @db.VarChar(100)
-  nidn           String   @db.VarChar(100)
-  jabatan        String   @db.VarChar(255)
-  username       String   @db.VarChar(100)
-  password       String   @db.VarChar(100)
-  email          String   @db.VarChar(100)
-  status         String   @db.VarChar(100)
+  nama           String?  @db.VarChar(255)
+  no_hp          String?  @db.VarChar(100)
+  nidn           String?  @db.VarChar(100)
+  jabatan        String?  @db.VarChar(255)
+  username       String?  @db.VarChar(100)
+  password       String?  @db.VarChar(100)
+  email          String?  @db.VarChar(100)
+  status         String?  @db.VarChar(100)
   remember_token String?  @db.VarChar(255)
-  created_at     DateTime @default(now())
-  update_at      DateTime @updatedAt
+  created_at     DateTime @default(now()) @db.Timestamp
+  update_at      DateTime @updatedAt @db.Timestamp
 }
 
-model Pembimbing {
+model pembimbing {
   id             String   @id @default(uuid()) @db.VarChar(100)
-  nama           String   @db.VarChar(255)
-  no_hp          String   @db.VarChar(100)
-  nidn           String   @db.VarChar(100)
-  jabatan        String   @db.VarChar(255)
-  username       String   @db.VarChar(100)
-  password       String   @db.VarChar(100)
-  email          String   @db.VarChar(100)
-  status         String   @db.VarChar(100)
+  nama           String?  @db.VarChar(255)
+  no_hp          String?  @db.VarChar(100)
+  nidn           String?  @db.VarChar(100)
+  jabatan        String?  @db.VarChar(255)
+  username       String?  @db.VarChar(100)
+  password       String?  @db.VarChar(100)
+  email          String?  @db.VarChar(100)
+  status         String?  @db.VarChar(100)
   remember_token String?  @db.VarChar(255)
-  created_at     DateTime @default(now())
-  update_at      DateTime @updatedAt
+  created_at     DateTime @default(now()) @db.Timestamp
+  update_at      DateTime @updatedAt @db.Timestamp
 
-  tugas_akhir_disetujui_pembimbing_satu TugasAkhirDisetujui[] @relation("PembimbingSatu")
-  tugas_akhir_disetujui_pembimbing_dua  TugasAkhirDisetujui[] @relation("PembimbingDua")
+  tugas_akhir_disetujui_pembimbing_satu_id tugas_akhir_disetujui[] @relation("TugasAkhirDisetujuiPembimbingSatu")
+  tugas_akhir_disetujui_pembimbing_dua_id  tugas_akhir_disetujui[] @relation("TugasAkhirDisetujuiPembimbingDua")
+  kerja_praktek_disetujui_pembimbing_satu_id kerja_praktek_disetujui[] @relation("KerjaPraktekDisetujuiPembimbingSatu")
 }
 
-model Mahasiswa {
-  id                  String          @id @default(uuid()) @db.VarChar(100)
-  nama                String          @db.VarChar(255)
-  nim                 String          @db.VarChar(100)
-  no_hp               String          @db.VarChar(100)
-  pembimbing_akademik String          @db.VarChar(255)
-  username            String          @db.VarChar(100)
-  password            String          @db.VarChar(100)
-  email               String          @db.VarChar(100)
-  status              String          @db.VarChar(100)
-  remember_token      String?         @db.VarChar(255)
-  created_at          DateTime        @default(now())
-  update_at           DateTime        @updatedAt
+model mahasiswa {
+  id                    String   @id @default(uuid()) @db.VarChar(100)
+  nama                  String?  @db.VarChar(255)
+  nim                   String?  @db.VarChar(100)
+  no_hp                 String?  @db.VarChar(100)
+  pembimbing_akademik   String?  @db.VarChar(255)
+  username              String?  @db.VarChar(100)
+  password              String?  @db.VarChar(100)
+  email                 String?  @db.VarChar(100)
+  status                String?  @db.VarChar(100)
+  remember_token        String?  @db.VarChar(255)
+  created_at            DateTime @default(now()) @db.Timestamp
+  update_at             DateTime @updatedAt @db.Timestamp
 
-  pengajuan_ta        PengajuanTa[]
-  seminar             Seminar[]
-  penilaian_seminar_proposal PenilaianSeminarProposal[]
-  penilaian_seminar_hasil    PenilaianSeminarHasil[]
+  pengajuan_ta           pengajuan_ta[]
+  pengajuan_kp           pengajuan_kp[]
+  penilaian_seminar_kp    penilaian_seminar_kp[]
+  penilaian_seminar_hasil penilaian_seminar_hasil[]
+  penilaian_seminar_proposal penilaian_seminar_proposal[]
+  seminar               seminar[]
 }
 
-model PengajuanTa {
+model form_or_file {
+  id         String   @id @default(uuid()) @db.VarChar(100)
+  deskripsi  String?  @db.Text
+  url        String?  @db.VarChar(255)
+  created_at DateTime @default(now()) @db.Timestamp
+  update_at  DateTime @updatedAt @db.Timestamp
+}
+
+model pengajuan_ta {
+  id                        String   @id @default(uuid()) @db.VarChar(100)
+  mahasiswa_id              String   @db.VarChar(100)
+  form_ta                   String?  @db.VarChar(255)
+  judul_pertama             String?  @db.Text
+  deskripsi_judul_pertama   String?  @db.Text
+  judul_kedua               String?  @db.Text
+  deskripsi_judul_kedua     String?  @db.Text
+  pembimbing_satu           String?  @db.VarChar(255)
+  pembimbing_dua            String?  @db.VarChar(255)
+  pembimbing_tiga           String?  @db.VarChar(255)
+  pembimbing_empat          String?  @db.VarChar(255)
+  transkip_nilai            String?  @db.VarChar(255)
+  krs                       String?  @db.VarChar(255)
+  bukti_pembayaran          String?  @db.VarChar(255)
+  bukti_selesai_praktikum   String?  @db.VarChar(255)
+  bukti_selsai_kp           String?  @db.VarChar(255)
+  jumlah_sks                String?  @db.VarChar(255)
+  ipk                       String?  @db.VarChar(255)
+  status                    String?  @db.VarChar(100)
+  keterangan                String?  @db.Text
+  created_at                DateTime @default(now()) @db.Timestamp
+  update_at                 DateTime @updatedAt @db.Timestamp
+
+  tugas_akhir_disetujui       tugas_akhir_disetujui[]
+
+  mahasiswa mahasiswa @relation(fields: [mahasiswa_id], references: [id])
+}
+
+model tugas_akhir_disetujui {
+  id                 String   @id @default(uuid()) @db.VarChar(100)
+  pengajuan_ta_id    String   @db.VarChar(100)
+  pembimbing_satu_id String   @db.VarChar(100)
+  pembimbing_dua_id  String?  @db.VarChar(100)
+  judul_penelitian   String?  @db.Text
+  created_at         DateTime @default(now()) @db.Timestamp
+  update_at          DateTime @updatedAt @db.Timestamp
+
+  pengajuan_ta        pengajuan_ta    @relation(fields: [pengajuan_ta_id], references: [id])
+  pembimbing_satu    pembimbing @relation("TugasAkhirDisetujuiPembimbingSatu", fields: [pembimbing_satu_id], references: [id])
+  pembimbing_dua     pembimbing? @relation("TugasAkhirDisetujuiPembimbingDua", fields: [pembimbing_dua_id], references: [id])
+}
+
+model pengajuan_kp {
+  id                           String   @id @default(uuid()) @db.VarChar(100)
+  mahasiswa_id                 String   @db.VarChar(100)
+  form_rekomendasi_pa_1        String?  @db.VarChar(255)
+  form_rekomendasi_pa_2        String?  @db.VarChar(255)
+  form_persetujuan_perusahaan  String?  @db.VarChar(255)
+  transkip_nilai               String?  @db.VarChar(255)
+  krs                          String?  @db.VarChar(255)
+  bukti_pembayaran             String?  @db.VarChar(255)
+  bukti_selesai_praktikum      String?  @db.VarChar(255)
+  ipk                          String?  @db.VarChar(255)
+  jumlah_sks                   String?  @db.VarChar(255)
+  tanggal_mulai_kp             DateTime? @db.Date
+  tanggal_selesai_kp           DateTime? @db.Date
+  status                       String?  @db.VarChar(100)
+  keterangan                   String?  @db.Text
+  created_at                   DateTime @default(now()) @db.Timestamp
+  update_at                    DateTime @updatedAt @db.Timestamp
+
+  kerja_praktek_disetujui        kerja_praktek_disetujui[]
+
+  mahasiswa mahasiswa @relation(fields: [mahasiswa_id], references: [id])
+}
+
+model kerja_praktek_disetujui {
+  id                  String   @id @default(uuid()) @db.VarChar(100)
+  pengajuan_kp_id     String   @db.VarChar(100)
+  pembimbing_satu_id  String   @db.VarChar(100)
+  judul_laporan       String?  @db.Text
+  created_at          DateTime @default(now()) @db.Timestamp
+  update_at           DateTime @updatedAt @db.Timestamp
+
+  pengajuan_kp         pengajuan_kp @relation(fields: [pengajuan_kp_id], references: [id])
+  pembimbing_satu     pembimbing @relation("KerjaPraktekDisetujuiPembimbingSatu", fields: [pembimbing_satu_id], references: [id])
+}
+
+model seminar {
+  id                String   @id @default(uuid()) @db.VarChar(100)
+  mahasiswa_id      String   @db.VarChar(100)
+  jenis_seminar     String?  @db.VarChar(100)
+  details_seminar   String?  @db.VarChar(100)
+  tanggal_seminar   DateTime? @db.Date
+  jam_mulai_seminar DateTime? @db.DateTime
+  jam_akhir_seminar DateTime? @db.DateTime
+  status            String?  @db.VarChar(100)
+  ruangan           String?  @db.VarChar(255)
+  lampiran          String?  @db.VarChar(255)
+  created_at        DateTime @default(now()) @db.Timestamp
+  update_at         DateTime @updatedAt @db.Timestamp
+
+  penilaian_seminar_proposal penilaian_seminar_proposal[]
+  penilaian_seminar_hasil    penilaian_seminar_hasil[]
+  penilaian_seminar_kp       penilaian_seminar_kp[]
+  penguji                   penguji[]
+
+  mahasiswa mahasiswa @relation(fields: [mahasiswa_id], references: [id])
+}
+
+model penilaian_seminar_proposal {
   id                      String   @id @default(uuid()) @db.VarChar(100)
   mahasiswa_id            String   @db.VarChar(100)
-  judul_pertama           String   @db.Text
-  deskripsi_judul_pertama String   @db.Text
-  judul_kedua             String   @db.Text
-  deskripsi_judul_kedua   String   @db.Text
-  pembimbing_satu         String   @db.VarChar(255)
-  pembimbing_dua          String   @db.VarChar(255)
-  pembimbing_tiga         String   @db.VarChar(255)
-  pembimbing_empat        String   @db.VarChar(255)
-  transkip_nilai          String   @db.VarChar(255)
-  krs                     String   @db.VarChar(255)
-  bukti_pembayaran        String   @db.VarChar(255)
-  bukti_selesai_praktikum String   @db.VarChar(255)
-  bukti_selsai_kp         String   @db.VarChar(255)
-  status                  String   @db.VarChar(100)
-  ipk                     String   @db.VarChar(255)
-  jumlah_sks              String   @db.VarChar(255)
-  keterangan              String   @db.Text
-  created_at              DateTime @default(now())
-  update_at               DateTime @updatedAt
+  seminar_id              String   @db.VarChar(100)
+  nilai_sempro            String?  @db.VarChar(255)
+  nilai_sidang_komprehensif String?  @db.VarChar(255)
+  nilai_pembimbing_satu   String?  @db.VarChar(255)
+  niali_pembimbing_dua    String?  @db.VarChar(255)
+  created_at              DateTime @default(now()) @db.Timestamp
+  update_at               DateTime @updatedAt @db.Timestamp
 
-  mahasiswa Mahasiswa @relation(fields: [mahasiswa_id], references: [id])
-  tugas_akhir_disetujui TugasAkhirDisetujui?
+  mahasiswa mahasiswa @relation(fields: [mahasiswa_id], references: [id])
+  seminar   seminar   @relation(fields: [seminar_id], references: [id])
 }
 
-model TugasAkhirDisetujui {
-  id                 String   @id @default(uuid()) @db.VarChar(100)
-  pengajuan_ta_id    String   @unique @db.VarChar(100)
-  pembimbing_satu_id String   @db.VarChar(100)
-  pembimbing_dua_id  String   @db.VarChar(255)
-  judul_penelitian   String   @db.Text
-  created_at         DateTime @default(now())
-  update_at          DateTime @updatedAt
+model penilaian_seminar_hasil {
+  id                      String   @id @default(uuid()) @db.VarChar(100)
+  mahasiswa_id            String   @db.VarChar(100)
+  seminar_id              String   @db.VarChar(100)
+  nilai_semhas            String?  @db.VarChar(255)
+  nilai_sidang_komprehensif String?  @db.VarChar(255)
+  nilai_pembimbing_satu   String?  @db.VarChar(255)
+  niali_pembimbing_dua    String?  @db.VarChar(255)
+  created_at              DateTime @default(now()) @db.Timestamp
+  update_at               DateTime @updatedAt @db.Timestamp
 
-  pengajuan_ta    PengajuanTa @relation(fields: [pengajuan_ta_id], references: [id])
-  pembimbing_satu Pembimbing  @relation("PembimbingSatu", fields: [pembimbing_satu_id], references: [id])
-  pembimbing_dua  Pembimbing  @relation("PembimbingDua", fields: [pembimbing_dua_id], references: [id])
+  mahasiswa mahasiswa @relation(fields: [mahasiswa_id], references: [id])
+  seminar   seminar   @relation(fields: [seminar_id], references: [id])
 }
 
-model Seminar {
-  id                 String   @id @default(uuid()) @db.VarChar(100)
-  mahasiswa_id       String   @db.VarChar(100)
-  jenis_seminar      String   @db.VarChar(100)
-  details_seminar    String   @db.VarChar(100)
-  tanggal_seminar    DateTime @db.Date
-  jam_mulai_seminar  DateTime @default(now())
-  jam_akhir_seminar  DateTime @default(dbgenerated("2000-01-01 00:00:00"))
-  status             String   @db.VarChar(100)
-  ruangan            String   @db.VarChar(255)
-  lampiran           String   @db.VarChar(255)
-  created_at         DateTime @default(now())
-  update_at          DateTime @updatedAt
+model penilaian_seminar_kp {
+  id                      String   @id @default(uuid()) @db.VarChar(100)
+  mahasiswa_id            String   @db.VarChar(100)
+  seminar_id              String   @db.VarChar(100)
+  nilai                   String?  @db.VarChar(255)
+  nilai_sidang_komprehensif String?  @db.VarChar(255)
+  nilai_pembimbing_satu   String?  @db.VarChar(255)
+  created_at              DateTime @default(now()) @db.Timestamp
+  update_at               DateTime @updatedAt @db.Timestamp
 
-  mahasiswa Mahasiswa @relation(fields: [mahasiswa_id], references: [id])
-  penilaian_seminar_proposal PenilaianSeminarProposal[]
-  penilaian_seminar_hasil PenilaianSeminarHasil[]
-  penguji Penguji[]
+  mahasiswa mahasiswa @relation(fields: [mahasiswa_id], references: [id])
+  seminar   seminar   @relation(fields: [seminar_id], references: [id])
 }
 
-model PenilaianSeminarProposal {
-  id                        String   @id @default(uuid()) @db.VarChar(100)
-  mahasiswa_id              String   @db.VarChar(100)
-  seminar_id                String   @db.VarChar(100)
-  nilai_sempro              String   @db.VarChar(255)
-  nilai_sidang_komprehensif String   @db.VarChar(255)
-  nilai_pembimbing_satu     String   @db.VarChar(255)
-  niali_pembimbing_dua      String   @db.VarChar(255)
-  created_at                DateTime @default(now())
-  update_at                 DateTime @updatedAt
+model penguji {
+  id            String   @id @default(uuid()) @db.VarChar(100)
+  seminar_id    String   @db.VarChar(100)
+  penguji_satu  String?  @db.VarChar(255)
+  penguji_dua   String?  @db.VarChar(255)
+  created_at    DateTime @default(now()) @db.Timestamp
+  update_at     DateTime @updatedAt @db.Timestamp
 
-  mahasiswa Mahasiswa @relation(fields: [mahasiswa_id], references: [id])
-  seminar   Seminar   @relation(fields: [seminar_id], references: [id])
-}
-
-model PenilaianSeminarHasil {
-  id                        String   @id @default(uuid()) @db.VarChar(100)
-  mahasiswa_id              String   @db.VarChar(100)
-  seminar_id                String   @db.VarChar(100)
-  nilai_semhas              String   @db.VarChar(255)
-  nilai_sidang_komprehensif String   @db.VarChar(255)
-  nilai_pembimbing_satu     String   @db.VarChar(255)
-  niali_pembimbing_dua      String   @db.VarChar(255)
-  created_at                DateTime @default(now())
-  update_at                 DateTime @updatedAt
-
-  mahasiswa Mahasiswa @relation(fields: [mahasiswa_id], references: [id])
-  seminar   Seminar   @relation(fields: [seminar_id], references: [id])
-}
-
-model Penguji {
-  id          String   @id @default(uuid()) @db.VarChar(100)
-  seminar_id  String   @db.VarChar(100)
-  penguji_satu String   @db.VarChar(255)
-  penguji_dua  String   @db.VarChar(255)
-  created_at  DateTime @default(now())
-  update_at   DateTime @updatedAt
-
-  seminar Seminar @relation(fields: [seminar_id], references: [id])
+  seminar seminar @relation(fields: [seminar_id], references: [id])
 }

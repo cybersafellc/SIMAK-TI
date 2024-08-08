@@ -3,6 +3,7 @@ import kordinatorController from "../controllers/kordinator-controller.js";
 import authMiddelware from "../middlewares/auth-middelware.js";
 import mahasiswaController from "../controllers/mahasiswa-controller.js";
 import pembimbingController from "../controllers/pembimbing-controller.js";
+import pengajuan_kpController from "../controllers/kerja-praktek/pengajuan_kp-controller.js";
 
 const router = express.Router();
 // kordinators
@@ -54,4 +55,8 @@ router.get(
   authMiddelware.pembimbing,
   pembimbingController.profile
 );
+
+// kp
+router.post("/kp", authMiddelware.mahasiswa, pengajuan_kpController.create);
+router.get("/kp", authMiddelware.authAll, pengajuan_kpController.get);
 export default router;

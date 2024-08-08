@@ -1,0 +1,19 @@
+1 Mahasiswa mendownload 3 form (1. gatau, 2 .gatau, 3. untuk perusahaan)
+2 Mahasiswa meminta TTD PA untuk form 1 dan 2
+3 Mahasiswa memberi form 3 ke perusahaan dituju
+4 Mahasiswa mendapatkan surat balasan dari perusahaan form 4
+5 Mahasiswa mengajukan 3 form ke sistem (form 1, 2, 4)
+6 Koridnator mnyetujui atau tidak
+7 jika tidak Koridnator menolak dengan memberi status ditolak dan memberi keterangan, Mahasiswa balik ke tahap 5 tapi hanya mengupload form 
+8 jika diisetujui Koridnator memberi 1 dosen pembimbing
+9 Mahasiswa magang dengan stres
+10 Mahasiswa berkonsultasi dengan dosen pembimbing nya terkait judul laporan
+11 Dosen pembimbing melakukan penginputan judul laporan Mahasiswa di sistem
+12 Setelah menyelesaikan Magang dan laporan
+13 Mahasiswa mengajukan seminar
+14 Koridnator menentukan Jadwal, penguji, ruangan dll
+15 Seminar dilakukan
+16 Koridnator menginput nilai hasil seminar KP
+17 Selesai
+
+salahhhhhh

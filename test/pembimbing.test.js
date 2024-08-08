@@ -219,4 +219,10 @@ describe("GET : /pembimbing", () => {
     expect(response.status).toBe(200);
     expect(response.body.error).toBe(false);
   });
+  it("page di input string bukan number", async () => {
+    const response = await supertest(web).get("/pembimbing?page=asumeneh");
+    logger.info(response.body);
+    expect(response.status).toBe(400);
+    expect(response.body.error).toBe(true);
+  });
 });
