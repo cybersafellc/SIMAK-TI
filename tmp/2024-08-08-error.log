@@ -27,3 +27,5 @@
 {"level":"error","message":"\nInvalid `prisma.pengajuan_kp.findMany()` invocation:\n\n\nError in query graph construction: AssertionError(\"Invalid value for skip argument: Value can only be positive, found: -30\")","timestamp":"2024-08-08T06:50:14.954Z"}
 {"level":"error","message":"\nInvalid `prisma.pengajuan_kp.findMany()` invocation:\n\n\nError in query graph construction: AssertionError(\"Invalid value for skip argument: Value can only be positive, found: -30\")","target":"pengajuan_kp.findMany","timestamp":"2024-08-08T06:50:34.730Z"}
 {"level":"error","message":"\nInvalid `prisma.pengajuan_kp.findMany()` invocation:\n\n\nError in query graph construction: AssertionError(\"Invalid value for skip argument: Value can only be positive, found: -30\")","timestamp":"2024-08-08T06:50:34.731Z"}
+{"level":"error","message":"Cannot read properties of null (reading 'pengajuan_kp_id')","timestamp":"2024-08-08T10:49:53.147Z"}
+{"level":"error","message":"Cannot read properties of null (reading 'pengajuan_kp_id')","timestamp":"2024-08-08T10:49:53.943Z"}

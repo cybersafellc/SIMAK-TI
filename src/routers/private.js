@@ -59,4 +59,20 @@ router.get(
 // kp
 router.post("/kp", authMiddelware.mahasiswa, pengajuan_kpController.create);
 router.get("/kp", authMiddelware.authAll, pengajuan_kpController.get);
+router.put(
+  "/kp/diterima",
+  authMiddelware.kordinator,
+  pengajuan_kpController.diterima
+);
+router.put(
+  "/kp/ditolak",
+  authMiddelware.kordinator,
+  pengajuan_kpController.ditolak
+);
+router.put(
+  "/kp/revisi",
+  authMiddelware.mahasiswa,
+  pengajuan_kpController.revisi
+);
+
 export default router;

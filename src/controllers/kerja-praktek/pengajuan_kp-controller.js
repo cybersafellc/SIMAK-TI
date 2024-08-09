@@ -10,6 +10,7 @@ const create = async (req, res, next) => {
   }
 };
 
+// ini belum fix, untuk get detail keselurhan harus lengkap setiap role nya, details pengajuan kp, disetujui, pembimbing / mahasiswanya
 const get = async (req, res, next) => {
   try {
     const { role, id } = await req;
@@ -30,6 +31,16 @@ const get = async (req, res, next) => {
         }
         break;
       case "pembimbing":
+        if (req.query.id) {
+          req.body.id = await req.id;
+          req.body.byid = await req.query.id;
+          response = await pengajuan_kpService.getByIdPembimbing(req.body);
+        } else {
+          req.body.page = (await req.query.page) || 1;
+          req.body.search = (await req.query.search) || undefined;
+          req.body.id = await req.id;
+          response = await pengajuan_kpService.getAllByPembimbing(req.body);
+        }
         break;
       default:
         throw new Error("role tidak diketahui");
@@ -40,4 +51,32 @@ const get = async (req, res, next) => {
   }
 };
 
-export default { create, get };
+const diterima = async (req, res, next) => {
+  try {
+    const response = await pengajuan_kpService.diterima(req.body);
+    res.status(response.status).json(response).end();
+  } catch (error) {
+    next(error);
+  }
+};
+
+const ditolak = async (req, res, next) => {
+  try {
+    const response = await pengajuan_kpService.ditolak(req.body);
+    res.status(response.status).json(response).end();
+  } catch (error) {
+    next(error);
+  }
+};
+
+const revisi = async (req, res, next) => {
+  try {
+    req.body.mahasiswa_id = await req.id;
+    const response = await pengajuan_kpService.revisi(req.body);
+    res.status(response.status).json(response).end();
+  } catch (error) {
+    next(error);
+  }
+};
+
+export default { create, get, diterima, ditolak, revisi };
