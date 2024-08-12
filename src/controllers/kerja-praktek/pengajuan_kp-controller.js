@@ -79,4 +79,31 @@ const revisi = async (req, res, next) => {
   }
 };
 
-export default { create, get, diterima, ditolak, revisi };
+const setJadwal = async (req, res, next) => {
+  try {
+    const response = await pengajuan_kpService.setJadwal(req.body);
+    res.status(response.status).json(response).end();
+  } catch (error) {
+    next(error);
+  }
+};
+
+const setJudulLaporan = async (req, res, next) => {
+  try {
+    req.body.pembimbing_id = await req.id;
+    const response = await pengajuan_kpService.setJudulLaporan(req.body);
+    res.status(response.status).json(response).end();
+  } catch (error) {
+    next(error);
+  }
+};
+
+export default {
+  create,
+  get,
+  diterima,
+  ditolak,
+  revisi,
+  setJadwal,
+  setJudulLaporan,
+};

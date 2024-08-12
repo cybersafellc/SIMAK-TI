@@ -61,6 +61,18 @@ const revisi = Joi.object({
   jumlah_sks: Joi.string().optional(),
 });
 
+const setJadwal = Joi.object({
+  tanggal_mulai_kp: Joi.date().required(),
+  tanggal_selesai_kp: Joi.date().required(),
+  id: Joi.string().required(),
+});
+
+const setJudulLaporan = Joi.object({
+  id: Joi.string().required(),
+  pembimbing_id: Joi.string().required(),
+  judul_laporan: Joi.string().required(),
+});
+
 export default {
   create,
   getMahasiswa,
@@ -71,4 +83,6 @@ export default {
   diterima,
   ditolak,
   revisi,
+  setJadwal,
+  setJudulLaporan,
 };

@@ -69,7 +69,7 @@ const getAllByKordinator = async (request) => {
   const take = 30;
   result.page -= 1;
   result.page *= take;
-  const pengajuans = await database.pengajuan_kp.findMany({
+  let pengajuans = await database.pengajuan_kp.findMany({
     where: {
       mahasiswa: {
         nama: {
@@ -83,51 +83,53 @@ const getAllByKordinator = async (request) => {
     skip: result.page,
     take: take,
   });
-  const pengajuanRemap = await Promise.all(
-    pengajuans.map(async (pengajuan) => {
-      pengajuan.mahasiswa = await database.mahasiswa.findUnique({
-        where: {
-          id: pengajuan.mahasiswa_id,
-        },
-        select: {
-          id: true,
-          nama: true,
-          nim: true,
-          no_hp: true,
-          pembimbing_akademik: true,
-          email: true,
-          status: true,
-        },
-      });
-      pengajuan.details_disetujui =
-        await database.kerja_praktek_disetujui.findFirst({
+  if (pengajuans.length > 0) {
+    pengajuans = await Promise.all(
+      pengajuans.map(async (pengajuan) => {
+        pengajuan.mahasiswa = await database.mahasiswa.findUnique({
           where: {
-            pengajuan_kp_id: pengajuan.id,
+            id: pengajuan.mahasiswa_id,
+          },
+          select: {
+            id: true,
+            nama: true,
+            nim: true,
+            no_hp: true,
+            pembimbing_akademik: true,
+            email: true,
+            status: true,
           },
         });
-      if (pengajuan.details_disetujui) {
-        pengajuan.details_disetujui.pembimbing_satu =
-          await database.pembimbing.findUnique({
+        pengajuan.details_disetujui =
+          await database.kerja_praktek_disetujui.findFirst({
             where: {
-              id: pengajuan.details_disetujui.pembimbing_satu_id,
-            },
-            select: {
-              id: true,
-              nama: true,
-              no_hp: true,
-              nidn: true,
-              email: true,
-              status: true,
+              pengajuan_kp_id: pengajuan.id,
             },
           });
-        pengajuan.details_disetujui.pengajuan_kp_id = undefined;
-        pengajuan.details_disetujui.pembimbing_satu_id = undefined;
-      }
-      pengajuan.mahasiswa_id = undefined;
-      return pengajuan;
-    })
-  );
-  return new Response(200, "list pengajuan kp", pengajuanRemap, null, false);
+        if (pengajuan.details_disetujui) {
+          pengajuan.details_disetujui.pembimbing_satu =
+            await database.pembimbing.findUnique({
+              where: {
+                id: pengajuan.details_disetujui.pembimbing_satu_id,
+              },
+              select: {
+                id: true,
+                nama: true,
+                no_hp: true,
+                nidn: true,
+                email: true,
+                status: true,
+              },
+            });
+          pengajuan.details_disetujui.pengajuan_kp_id = undefined;
+          pengajuan.details_disetujui.pembimbing_satu_id = undefined;
+        }
+        pengajuan.mahasiswa_id = undefined;
+        return pengajuan;
+      })
+    );
+  }
+  return new Response(200, "list pengajuan kp", pengajuans, null, false);
 };
 
 const getById = async (request) => {
@@ -199,7 +201,7 @@ const getAllByPembimbing = async (request) => {
   const take = 30;
   result.page -= 1;
   result.page *= take;
-  const kpdisetujui = await database.kerja_praktek_disetujui.findMany({
+  let kpdisetujui = await database.kerja_praktek_disetujui.findMany({
     orderBy: {
       created_at: "desc",
     },
@@ -217,37 +219,39 @@ const getAllByPembimbing = async (request) => {
     take: take,
   });
 
-  const kpdisetujuiMaping = await Promise.all(
-    kpdisetujui.map(async (data) => {
-      data.detail_pengajuan_kp = await database.pengajuan_kp.findUnique({
-        where: {
-          id: data.pengajuan_kp_id,
-        },
-      });
-      data.detail_mahasiswa = await database.mahasiswa.findUnique({
-        where: {
-          id: data.detail_pengajuan_kp.mahasiswa_id,
-        },
-        select: {
-          id: true,
-          nama: true,
-          nim: true,
-          no_hp: true,
-          pembimbing_akademik: true,
-          email: true,
-          status: true,
-        },
-      });
-      data.pengajuan_kp_id = undefined;
-      data.detail_pengajuan_kp.mahasiswa_id = undefined;
-      return data;
-    })
-  );
+  if (kpdisetujui.length > 0) {
+    kpdisetujui = await Promise.all(
+      kpdisetujui.map(async (data) => {
+        data.detail_pengajuan_kp = await database.pengajuan_kp.findUnique({
+          where: {
+            id: data.pengajuan_kp_id,
+          },
+        });
+        data.detail_mahasiswa = await database.mahasiswa.findUnique({
+          where: {
+            id: data.detail_pengajuan_kp.mahasiswa_id,
+          },
+          select: {
+            id: true,
+            nama: true,
+            nim: true,
+            no_hp: true,
+            pembimbing_akademik: true,
+            email: true,
+            status: true,
+          },
+        });
+        data.pengajuan_kp_id = undefined;
+        data.detail_pengajuan_kp.mahasiswa_id = undefined;
+        return data;
+      })
+    );
+  }
 
   return new Response(
     200,
     "list mahasiswa bimbingan",
-    kpdisetujuiMaping,
+    kpdisetujui,
     null,
     false
   );
@@ -409,6 +413,54 @@ const revisi = async (request) => {
   return new Response(200, "berhasil revisi", revisiExe, null, false);
 };
 
+const setJadwal = async (request) => {
+  const result = await validation(pengajuan_kpValidation.setJadwal, request);
+  const count = await database.pengajuan_kp.count({
+    where: {
+      id: result.id,
+    },
+  });
+  if (!count)
+    throw new ResponseError(
+      400,
+      "tidak ada pengajuan_kp dengan id:" + result.id
+    );
+  await database.pengajuan_kp.update({
+    data: {
+      tanggal_mulai_kp: result.tanggal_mulai_kp,
+      tanggal_selesai_kp: result.tanggal_selesai_kp,
+    },
+    where: {
+      id: result.id,
+    },
+  });
+  return new Response(200, "berhasil mengupdate jadwal", result, null, false);
+};
+
+const setJudulLaporan = async (request) => {
+  const result = await validation(
+    pengajuan_kpValidation.setJudulLaporan,
+    request
+  );
+  const count = await database.kerja_praktek_disetujui.count({
+    where: {
+      id: result.id,
+      pembimbing_satu_id: result.pembimbing_id,
+    },
+  });
+  if (!count) throw new ResponseError(400, "tidak ada id:" + result.id);
+  await database.kerja_praktek_disetujui.update({
+    data: {
+      judul_laporan: result.judul_laporan,
+    },
+    where: {
+      id: result.id,
+      pembimbing_satu_id: result.pembimbing_id,
+    },
+  });
+  return new Response(200, "berhasil set judul laporan", result, null, false);
+};
+
 export default {
   create,
   getMahasiswa,
@@ -419,4 +471,6 @@ export default {
   diterima,
   ditolak,
   revisi,
+  setJadwal,
+  setJudulLaporan,
 };
