@@ -1,81 +1,67 @@
 import { database } from "../../app/database.js";
 import { Response } from "../../app/response.js";
 import { ResponseError } from "../../errors/response-error.js";
-import seminarValidation from "../../validations/kerja-praktek/seminar-validation.js";
+import seminarValidation from "../../validations/tugas-akhir/seminar-validation.js";
 import validation from "../../validations/validation.js";
 import crypto from "crypto";
 
-const create = async (request) => {
-  const result = await validation(seminarValidation.create, request);
-  //   validasi apakah sudah mengajukan seminar kp
+const createSempro = async (request) => {
+  const result = await validation(seminarValidation.createSempro, request);
   const count = await database.seminar.count({
-    where: result,
-  });
-  if (count)
-    throw new ResponseError(
-      400,
-      "anda sudah mengajukan seminar kp sebelumnya !"
-    );
-  //   validasi pengajuan kp dipastikan sudah di ajukan dan diterima statusnya
-  result.status = "diterima";
-  const pengajuan_kp = await database.pengajuan_kp.findFirst({
-    where: result,
-    select: {
-      id: true,
+    where: {
+      mahasiswa_id: result.mahasiswa_id,
+      jenis_seminar: "sempro",
     },
   });
-  if (!pengajuan_kp)
+  if (count)
+    throw new ResponseError(400, "anda sudah mengajukan seminar proposal");
+  const pengajuanTa = await database.pengajuan_ta.findFirst({
+    where: {
+      mahasiswa_id: result.mahasiswa_id,
+      status: "diterima",
+    },
+  });
+  if (!pengajuanTa)
     throw new ResponseError(
       400,
-      "maaf kamu belum bisa melakukan pengajuan seminar!. Pastikan pengajuan kp anda sudah disetujui/diterima kordinator terlebih dahulu."
+      "tidak ada pengajuan tugas akhir anda yang diterima"
     );
-  // validasi sudah memiliki judul laporan
-  const kerja_praktek_disetujui =
-    await database.kerja_praktek_disetujui.findFirst({
-      where: {
-        pengajuan_kp_id: pengajuan_kp.id,
-      },
-      select: {
-        id: true,
-        judul_laporan: true,
-      },
-    });
-  if (!kerja_praktek_disetujui?.judul_laporan)
-    throw new ResponseError(400, "maaf anda belum memiliki judul laporan !");
-  //   pengajuan seminar
-  const dataSeminar = {};
-  dataSeminar.id = crypto.randomUUID();
-  dataSeminar.mahasiswa_id = result.mahasiswa_id;
-  dataSeminar.jenis_seminar = "kp";
-  dataSeminar.details_seminar = kerja_praktek_disetujui.id;
-  dataSeminar.status = "menunggu";
-
-  const createSeminar = await database.seminar.create({
-    data: dataSeminar,
+  const tugasAkhirDisetujui = await database.tugas_akhir_disetujui.findFirst({
+    where: {
+      pengajuan_ta_id: pengajuanTa.id,
+    },
   });
-
+  const executeResponse = await database.seminar.create({
+    data: {
+      id: crypto.randomUUID(),
+      mahasiswa_id: result.mahasiswa_id,
+      jenis_seminar: "sempro",
+      details_seminar: tugasAkhirDisetujui.id,
+      status: "menunggu",
+    },
+  });
   return new Response(
     200,
-    "berhasil megajukan seminar",
-    createSeminar,
+    "berhasil mengajukan seminar proposal",
+    executeResponse,
     null,
     false
   );
 };
 
-const disetujui = async (request) => {
-  const result = await validation(seminarValidation.disetujui, request);
+const setujuiSempro = async (request) => {
+  const result = await validation(seminarValidation.setujuiSempro, request);
   const count = await database.seminar.count({
     where: {
       id: result.id,
-      jenis_seminar: "kp",
+      jenis_seminar: "sempro",
       status: "menunggu",
     },
   });
   if (!count)
     throw new ResponseError(
       400,
-      "tidak ada seminar id:" + result.id + " dengan status menunggu"
+      "tidak ada seminar proposal id:" + result.id + " dengan status menunggu"
     );
   await database.seminar.update({
     data: {
@@ -89,11 +75,8 @@ const disetujui = async (request) => {
     where: {
       id: result.id,
     },
-    select: {
-      id: true,
-    },
   });
-  await database.penguji.create({
+  const resSetPenguji = await database.penguji.create({
     data: {
       id: crypto.randomUUID(),
       seminar_id: result.id,
@@ -103,32 +86,35 @@ const disetujui = async (request) => {
   });
   return new Response(
     200,
-    "berhasil menyetujui dan menetapkan penguji untuk seminar id:" + result.id,
-    result,
+    "berhasil menyetujui seminar id:" + result.id,
+    resSetPenguji,
     null,
     false
   );
 };
 
-const getPKordinator = async (request) => {
-  const result = await validation(seminarValidation.getPKordinator, request);
+const getKordinatorSempro = async (request) => {
+  const result = await validation(
+    seminarValidation.getKordinatorSempro,
+    request
+  );
   const take = 30;
   result.page -= 1;
-  result.page *= take;
+  result.page *= 30;
   let seminars = await database.seminar.findMany({
-    orderBy: {
-      created_at: "desc",
-    },
-    skip: result.page,
-    take: take,
     where: {
+      jenis_seminar: "sempro",
       mahasiswa: {
         nama: {
           contains: result.search,
         },
       },
-      jenis_seminar: "kp",
     },
+    orderBy: {
+      created_at: "desc",
+    },
+    skip: result.page,
+    take: take,
   });
   if (seminars.length > 0) {
     seminars = await Promise.all(
@@ -145,20 +131,22 @@ const getPKordinator = async (request) => {
             update_at: true,
           },
         });
-        seminar.penilaian_seminar_kp =
-          await database.penilaian_seminar_kp.findFirst({
+        seminar.penilaian = await database.penilaian_seminar_proposal.findFirst(
+          {
             where: {
               seminar_id: seminar.id,
             },
             select: {
               id: true,
-              nilai: true,
+              nilai_sempro: true,
               nilai_sidang_komprehensif: true,
               nilai_pembimbing_satu: true,
+              niali_pembimbing_dua: true,
               created_at: true,
               update_at: true,
             },
-          });
+          }
+        );
         seminar.mahasiswa = await database.mahasiswa.findUnique({
           where: {
             id: seminar.mahasiswa_id,
@@ -174,16 +162,9 @@ const getPKordinator = async (request) => {
           },
         });
         seminar.details_seminar =
-          await database.kerja_praktek_disetujui.findUnique({
+          await database.tugas_akhir_disetujui.findUnique({
             where: {
               id: seminar.details_seminar,
-            },
-            select: {
-              id: true,
-              pembimbing_satu_id: true,
-              judul_laporan: true,
-              created_at: true,
-              update_at: true,
             },
           });
         if (seminar.details_seminar) {
@@ -200,35 +181,49 @@ const getPKordinator = async (request) => {
                 jabatan: true,
                 email: true,
                 status: true,
-                created_at: true,
-                update_at: true,
+              },
+            });
+          seminar.details_seminar.pembimbing_dua =
+            await database.pembimbing.findUnique({
+              where: {
+                id: seminar.details_seminar.pembimbing_dua_id,
+              },
+              select: {
+                id: true,
+                nama: true,
+                no_hp: true,
+                nidn: true,
+                jabatan: true,
+                email: true,
+                status: true,
               },
             });
           seminar.details_seminar.pembimbing_satu_id = undefined;
+          seminar.details_seminar.pembimbing_dua_id = undefined;
         }
         seminar.mahasiswa_id = undefined;
         return seminar;
       })
     );
   }
-  return new Response(200, "list seminar", seminars, null, false);
+  return new Response(200, "list seminar proposal", seminars, null, false);
 };
 
-const getPKordinatorById = async (request) => {
+const getKordinatorByIdSempro = async (request) => {
   const result = await validation(
-    seminarValidation.getPKordinatorById,
+    seminarValidation.getKordinatorByIdSempro,
     request
   );
-  const seminar = await database.seminar.findUnique({
+  let seminar = await database.seminar.findUnique({
     where: {
       id: result.id,
-      jenis_seminar: "kp",
+      jenis_seminar: "sempro",
     },
   });
   if (!seminar)
     throw new ResponseError(
       400,
-      "seminar dengan id:" + result.id + " tidak ada!"
+      "seminar proposal dengan id:" + result.id + " tidak ditemukan"
     );
   seminar.penguji = await database.penguji.findFirst({
     where: {
@@ -242,15 +237,16 @@ const getPKordinatorById = async (request) => {
       update_at: true,
     },
   });
-  seminar.penilaian_seminar_kp = await database.penilaian_seminar_kp.findFirst({
+  seminar.penilaian = await database.penilaian_seminar_proposal.findFirst({
     where: {
       seminar_id: seminar.id,
     },
     select: {
       id: true,
-      nilai: true,
+      nilai_sempro: true,
       nilai_sidang_komprehensif: true,
       nilai_pembimbing_satu: true,
+      niali_pembimbing_dua: true,
       created_at: true,
       update_at: true,
     },
@@ -269,16 +265,9 @@ const getPKordinatorById = async (request) => {
       status: true,
     },
   });
-  seminar.details_seminar = await database.kerja_praktek_disetujui.findUnique({
+  seminar.details_seminar = await database.tugas_akhir_disetujui.findUnique({
     where: {
       id: seminar.details_seminar,
-    },
-    select: {
-      id: true,
-      pembimbing_satu_id: true,
-      judul_laporan: true,
-      created_at: true,
-      update_at: true,
     },
   });
   if (seminar.details_seminar) {
@@ -295,62 +284,49 @@ const getPKordinatorById = async (request) => {
           jabatan: true,
           email: true,
           status: true,
-          created_at: true,
-          update_at: true,
+        },
+      });
+    seminar.details_seminar.pembimbing_dua =
+      await database.pembimbing.findUnique({
+        where: {
+          id: seminar.details_seminar.pembimbing_dua_id,
+        },
+        select: {
+          id: true,
+          nama: true,
+          no_hp: true,
+          nidn: true,
+          jabatan: true,
+          email: true,
+          status: true,
         },
       });
     seminar.details_seminar.pembimbing_satu_id = undefined;
+    seminar.details_seminar.pembimbing_dua_id = undefined;
   }
   seminar.mahasiswa_id = undefined;
   return new Response(
     200,
-    "seminar kp dengan id:" + result.id,
+    "detail seminar proposal id:" + result.id,
     seminar,
     null,
     false
   );
 };
 
-const getPMahasiswa = async (request) => {
-  const result = await validation(seminarValidation.getPMahasiswa, request);
-  result.jenis_seminar = "kp";
+const getMahasiswaSempro = async (request) => {
+  const result = await validation(
+    seminarValidation.getMahasiswaSempro,
+    request
+  );
   const seminar = await database.seminar.findFirst({
-    where: result,
+    where: {
+      mahasiswa_id: result.mahasiswa_id,
+      jenis_seminar: "sempro",
+    },
   });
   if (!seminar)
-    throw new ResponseError(400, "anda belum mengajukan seminar kp!");
-  seminar.details_seminar = await database.kerja_praktek_disetujui.findUnique({
-    where: {
-      id: seminar.details_seminar,
-    },
-    select: {
-      id: true,
-      pembimbing_satu_id: true,
-      judul_laporan: true,
-      created_at: true,
-      update_at: true,
-    },
-  });
-  if (seminar.details_seminar) {
-    seminar.details_seminar.pembimbing_satu =
-      await database.pembimbing.findUnique({
-        where: {
-          id: seminar.details_seminar.pembimbing_satu_id,
-        },
-        select: {
-          id: true,
-          nama: true,
-          no_hp: true,
-          nidn: true,
-          jabatan: true,
-          email: true,
-          status: true,
-          created_at: true,
-          update_at: true,
-        },
-      });
-    seminar.details_seminar.pembimbing_satu_id = undefined;
-  }
+    throw new ResponseError(400, "anda belum mengajukan seminar proposal");
   seminar.penguji = await database.penguji.findFirst({
     where: {
       seminar_id: seminar.id,
@@ -363,25 +339,72 @@ const getPMahasiswa = async (request) => {
       update_at: true,
     },
   });
-  seminar.penilaian_seminar_kp = await database.penilaian_seminar_kp.findFirst({
+  seminar.penilaian = await database.penilaian_seminar_proposal.findFirst({
     where: {
       seminar_id: seminar.id,
     },
     select: {
       id: true,
-      nilai: true,
+      nilai_sempro: true,
       nilai_sidang_komprehensif: true,
       nilai_pembimbing_satu: true,
+      niali_pembimbing_dua: true,
       created_at: true,
       update_at: true,
     },
   });
-  return new Response(200, "details seminar", seminar, null, false);
+  seminar.details_seminar = await database.tugas_akhir_disetujui.findUnique({
+    where: {
+      id: seminar.details_seminar,
+    },
+  });
+  if (seminar.details_seminar) {
+    seminar.details_seminar.pembimbing_satu =
+      await database.pembimbing.findUnique({
+        where: {
+          id: seminar.details_seminar.pembimbing_satu_id,
+        },
+        select: {
+          id: true,
+          nama: true,
+          no_hp: true,
+          nidn: true,
+          jabatan: true,
+          email: true,
+          status: true,
+        },
+      });
+    seminar.details_seminar.pembimbing_dua =
+      await database.pembimbing.findUnique({
+        where: {
+          id: seminar.details_seminar.pembimbing_dua_id,
+        },
+        select: {
+          id: true,
+          nama: true,
+          no_hp: true,
+          nidn: true,
+          jabatan: true,
+          email: true,
+          status: true,
+        },
+      });
+    seminar.details_seminar.pembimbing_satu_id = undefined;
+    seminar.details_seminar.pembimbing_dua_id = undefined;
+  }
+  seminar.mahasiswa_id = undefined;
+  return new Response(
+    200,
+    "detail seminar proposal anda",
+    seminar,
+    null,
+    false
+  );
 };
 
-const penilaian = async (request) => {
+const penilaianSempro = async (request) => {
   const result = await validation(seminarValidation.penilaian, request);
-  const count = await database.penilaian_seminar_kp.count({
+  const count = await database.penilaian_seminar_proposal.count({
     where: {
       seminar_id: result.id,
     },
@@ -391,28 +414,29 @@ const penilaian = async (request) => {
   const seminar = await database.seminar.findFirst({
     where: {
       id: result.id,
+      jenis_seminar: "sempro",
       status: "disetujui",
-      jenis_seminar: "kp",
     },
   });
   if (!seminar)
     throw new ResponseError(
       400,
-      "tidak ada seminar kp disetujui dengan id:" + result.id
+      "tidak ada seminar proposal id:" + result.id + " dengan status disetujui"
     );
-  const resPenilaian = await database.penilaian_seminar_kp.create({
+  const resPenilaian = await database.penilaian_seminar_proposal.create({
     data: {
       id: crypto.randomUUID(),
       mahasiswa_id: seminar.mahasiswa_id,
       seminar_id: seminar.id,
-      nilai: result.nilai,
+      nilai_sempro: result.nilai_sempro,
       nilai_sidang_komprehensif: result.nilai_sidang_komprehensif,
       nilai_pembimbing_satu: result.nilai_pembimbing_satu,
+      niali_pembimbing_dua: result.nilai_pembimbing_dua,
     },
   });
   return new Response(
     200,
-    "berhasil menambahkan nilai",
+    "berhasil memberikan nilai",
     resPenilaian,
     null,
     false
@@ -420,10 +444,10 @@ const penilaian = async (request) => {
 };
 
 export default {
-  create,
-  disetujui,
-  getPKordinator,
-  getPKordinatorById,
-  getPMahasiswa,
-  penilaian,
+  createSempro,
+  setujuiSempro,
+  getKordinatorSempro,
+  getKordinatorByIdSempro,
+  getMahasiswaSempro,
+  penilaianSempro,
 };

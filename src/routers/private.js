@@ -1,10 +1,12 @@
-import express from "express";
+import express, { Route } from "express";
 import kordinatorController from "../controllers/kordinator-controller.js";
 import authMiddelware from "../middlewares/auth-middelware.js";
 import mahasiswaController from "../controllers/mahasiswa-controller.js";
 import pembimbingController from "../controllers/pembimbing-controller.js";
 import pengajuan_kpController from "../controllers/kerja-praktek/pengajuan_kp-controller.js";
 import seminarController from "../controllers/kerja-praktek/seminar-controller.js";
+import seminarTaController from "../controllers/tugas-akhir/seminar-controller.js";
+import pengajuanController from "../controllers/tugas-akhir/pengajuan-controller.js";
 
 const router = express.Router();
 // kordinators
@@ -98,6 +100,43 @@ router.put(
   "/seminar/kp/penilaian",
   authMiddelware.kordinator,
   seminarController.penilaian
+);
+
+// ta
+router.post("/ta", authMiddelware.mahasiswa, pengajuanController.create);
+router.get("/ta", authMiddelware.authAll, pengajuanController.get);
+router.put(
+  "/ta/ditolak",
+  authMiddelware.kordinator,
+  pengajuanController.ditolak
+);
+router.put("/ta/revisi", authMiddelware.mahasiswa, pengajuanController.revisi);
+router.put(
+  "/ta/diterima",
+  authMiddelware.kordinator,
+  pengajuanController.diterima
+);
+
+// seminar proposal
+router.post(
+  "/seminar/ta/proposal",
+  authMiddelware.mahasiswa,
+  seminarTaController.createSempro
+);
+router.put(
+  "/seminar/ta/proposal",
+  authMiddelware.kordinator,
+  seminarTaController.setujuiSempro
+);
+router.get(
+  "/seminar/ta/proposal",
+  authMiddelware.authAll,
+  seminarTaController.getSempro
+);
+router.put(
+  "/seminar/ta/proposal/penilaian",
+  authMiddelware.kordinator,
+  seminarTaController.penilaianSempro
 );
 
 export default router;
