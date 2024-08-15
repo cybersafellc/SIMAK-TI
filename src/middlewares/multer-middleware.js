@@ -1,6 +1,6 @@
 import multer from "multer";
-import { generate } from "../app/id.js";
 import path from "path";
+import crypto from "crypto";
 
 const fileStorage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -8,17 +8,21 @@ const fileStorage = multer.diskStorage({
   },
   filename: async (req, file, cb) => {
     const ext = path.extname(file.originalname);
-    const allowedExtensions = [".png", ".jpg", ".jpeg"];
+    const allowedExtensions = [".pdf", ".doc", ".docx"];
     if (!allowedExtensions.includes(ext.toLowerCase())) {
       return cb(new Error("Invalid file type"));
     }
-    const uniqueFilename = (await generate.ohter_id()) + ext;
+    const uniqueFilename = crypto.randomUUID() + ext;
     cb(null, uniqueFilename);
   },
 });
 
 const fileFilter = (req, file, cb) => {
-  const allowedMimeTypes = ["image/png", "image/jpg", "image/jpeg"];
+  const allowedMimeTypes = [
+    "application/pdf",
+    "application/msword", // for .doc
+    "application/vnd.openxmlformats-officedocument.wordprocessingml.document", // for .docx
+  ];
   cb(null, allowedMimeTypes.includes(file.mimetype));
 };
 

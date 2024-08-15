@@ -1,0 +1,11 @@
+Mahasiswa mengajukan ta
+Koridnator menerima atau menolak
+Jika menolak Koridnator memberi keterangan
+Jika Koridnator menolak, Mahasiswa bisa revisi dengan melengkapi sesuai keterangan yang diberikan Koridnator
+Jika diisetujui Koridnator memberi 2 dosen pembimbing dan menentikan judul penilitian
+Mahasiswa mengajukan seminar proposal
+Koridnator meng aprove / menyetujui seminar proposal
+Setelah seminar berlangsung Koridnator menginput nilai seminar proposal
+Mahasiswa mengajukan seminar hasil
+Koridnator meng aprove / menyetujui seminar hasil
+Setelah seminar berlangsung Koridnator menginput nilai seminar hasil

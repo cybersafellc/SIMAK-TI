@@ -7,6 +7,8 @@ import pengajuan_kpController from "../controllers/kerja-praktek/pengajuan_kp-co
 import seminarController from "../controllers/kerja-praktek/seminar-controller.js";
 import seminarTaController from "../controllers/tugas-akhir/seminar-controller.js";
 import pengajuanController from "../controllers/tugas-akhir/pengajuan-controller.js";
+import { multers } from "../middlewares/multer-middleware.js";
+import fileController from "../controllers/file-controller.js";
 
 const router = express.Router();
 // kordinators
@@ -138,5 +140,32 @@ router.put(
   authMiddelware.kordinator,
   seminarTaController.penilaianSempro
 );
-
+// seminar hasil
+router.post(
+  "/seminar/ta/hasil",
+  authMiddelware.mahasiswa,
+  seminarTaController.createSemhas
+);
+router.put(
+  "/seminar/ta/hasil",
+  authMiddelware.kordinator,
+  seminarTaController.setujuiSemhas
+);
+router.get(
+  "/seminar/ta/hasil",
+  authMiddelware.authAll,
+  seminarTaController.getSemhas
+);
+router.put(
+  "/seminar/ta/hasil/penilaian",
+  authMiddelware.kordinator,
+  seminarTaController.penilaianSemhas
+);
+router.post(
+  "/files",
+  authMiddelware.kordinator,
+  multers,
+  fileController.upload
+);
+router.delete("/files", authMiddelware.kordinator, fileController.deletes);
 export default router;
