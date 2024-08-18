@@ -95,6 +95,20 @@ const getAllPublic = async (request) => {
   result.page = result.page - 1;
   result.page = result.page * 30;
   const pembimbings = await database.pembimbing.findMany({
+    where: {
+      OR: [
+        {
+          nama: {
+            contains: result.search || "",
+          },
+        },
+        {
+          nidn: {
+            contains: result.search || "",
+          },
+        },
+      ],
+    },
     orderBy: {
       nama: "desc",
     },
@@ -108,7 +122,11 @@ const getAllPublic = async (request) => {
       status: true,
     },
   });
+
   return new Response(200, "list pembimbing", pembimbings, null, false);
 };
-
-export default { create, login, tokenVerify, profile, getAllPublic };
+const count = async () => {
+  const count = await database.pembimbing.count();
+  return await new Response(200, "berhasil menghitung", count, null, false);
+};
+export default { create, login, tokenVerify, profile, getAllPublic, count };

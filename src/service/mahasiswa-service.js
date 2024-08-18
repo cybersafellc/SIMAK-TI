@@ -89,6 +89,20 @@ const getAll = async (request) => {
   result.page = result.page - 1;
   result.page = result.page * 30;
   const mahasiswas = await database.mahasiswa.findMany({
+    where: {
+      OR: [
+        {
+          nama: {
+            contains: result.search || "",
+          },
+        },
+        {
+          nim: {
+            contains: result.search || "",
+          },
+        },
+      ],
+    },
     orderBy: {
       created_at: "desc",
     },
@@ -108,5 +122,8 @@ const getAll = async (request) => {
   });
   return new Response(200, "list mahasiswa", mahasiswas, null, false);
 };
-
-export default { create, login, tokenVerify, profile, getAll };
+const count = async () => {
+  const count = await database.mahasiswa.count();
+  return await new Response(200, "berhasil menghitung", count, null, false);
+};
+export default { create, login, tokenVerify, profile, getAll, count };

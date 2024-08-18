@@ -28,7 +28,7 @@ const tokenVerify = async (req, res, next) => {
 };
 const profile = async (req, res, next) => {
   try {
-    req.body.id = req.id;
+    req.body.id = await req.id;
     const response = await kordinatorService.profile(req.body);
     res.status(response.status).json(response).end();
   } catch (error) {
@@ -37,11 +37,20 @@ const profile = async (req, res, next) => {
 };
 const getAll = async (req, res, next) => {
   try {
-    req.body.page = req.query.page || 1;
+    req.body.page = (await req.query.page) || 1;
+    req.body.search = (await req.query.search) || undefined;
     const response = await kordinatorService.getAll(req.body);
     res.status(response.status).json(response).end();
   } catch (error) {
     next(error);
   }
 };
-export default { create, login, profile, getAll, tokenVerify };
+const count = async (req, res, next) => {
+  try {
+    const response = await kordinatorService.count();
+    res.status(response.status).json(response).end();
+  } catch (error) {
+    next(error);
+  }
+};
+export default { create, login, profile, getAll, tokenVerify, count };

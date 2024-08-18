@@ -68,5 +68,8 @@ const deletes = async (request) => {
   });
   return new Response(200, "berhasil menghapus file", responseDelete);
 };
-
-export default { upload, get, deletes };
+const count = async () => {
+  const count = await database.form_or_file.count();
+  return await new Response(200, "berhasil menghitung", count, null, false);
+};
+export default { upload, get, deletes, count };

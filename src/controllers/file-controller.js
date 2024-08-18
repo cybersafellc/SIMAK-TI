@@ -36,4 +36,12 @@ const deletes = async (req, res, next) => {
   }
 };
 
-export default { upload, get, deletes };
+const count = async (req, res, next) => {
+  try {
+    const response = await fileService.count();
+    res.status(response.status).json(response).end();
+  } catch (error) {
+    next(error);
+  }
+};
+export default { upload, get, deletes, count };

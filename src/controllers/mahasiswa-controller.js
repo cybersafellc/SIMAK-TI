@@ -37,11 +37,20 @@ const profile = async (req, res, next) => {
 };
 const getAll = async (req, res, next) => {
   try {
-    req.body.page = req.query.page || 1;
+    req.body.page = (await req.query.page) || 1;
+    req.body.search = (await req.query.search) || undefined;
     const response = await mahasiswaService.getAll(req.body);
     res.status(response.status).json(response).end();
   } catch (error) {
     next(error);
   }
 };
-export default { create, login, tokenVerify, profile, getAll };
+const count = async (req, res, next) => {
+  try {
+    const response = await mahasiswaService.count();
+    res.status(response.status).json(response).end();
+  } catch (error) {
+    next(error);
+  }
+};
+export default { create, login, tokenVerify, profile, getAll, count };

@@ -24,7 +24,8 @@ const profile = Joi.object({
 });
 
 const getAllPublic = Joi.object({
-  page: Joi.number().optional(),
+  page: Joi.number().required(),
+  search: Joi.string().optional(),
 });
 
 export default { create, login, tokenVerify, profile, getAllPublic };

@@ -105,6 +105,20 @@ const getAll = async (request) => {
   result.page = result.page - 1;
   result.page = result.page * 30;
   const kordinators = await database.kordinator.findMany({
+    where: {
+      OR: [
+        {
+          nama: {
+            contains: result.search || "",
+          },
+        },
+        {
+          nidn: {
+            contains: result.search || "",
+          },
+        },
+      ],
+    },
     select: {
       id: true,
       nama: true,
@@ -124,5 +138,8 @@ const getAll = async (request) => {
   });
   return new Response(200, "kordinators", kordinators, null, false);
 };
-
-export default { create, login, profile, getAll, tokenVerify };
+const count = async () => {
+  const count = await database.kordinator.count();
+  return await new Response(200, "berhasil menghitung", count, null, false);
+};
+export default { create, login, profile, getAll, tokenVerify, count };
