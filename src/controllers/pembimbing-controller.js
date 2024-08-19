@@ -37,10 +37,16 @@ const profile = async (req, res, next) => {
 };
 const getAllPublic = async (req, res, next) => {
   try {
-    req.body.page = (await req.query.page) || 1;
-    req.body.search = (await req.query.search) || undefined;
-    const response = await pembimbingService.getAllPublic(req.body);
-    res.status(response.status).json(response).end();
+    if (req.query.id) {
+      req.body.id = await req.query.id;
+      const response = await pembimbingService.getById(req.body);
+      res.status(response.status).json(response).end();
+    } else {
+      req.body.page = (await req.query.page) || 1;
+      req.body.search = (await req.query.search) || undefined;
+      const response = await pembimbingService.getAllPublic(req.body);
+      res.status(response.status).json(response).end();
+    }
   } catch (error) {
     next(error);
   }
@@ -53,4 +59,31 @@ const count = async (req, res, next) => {
     next(error);
   }
 };
-export default { create, login, tokenVerify, profile, getAllPublic, count };
+const updateProfile = async (req, res, next) => {
+  try {
+    req.body.id = await req.id;
+    const response = await pembimbingService.updateProfile(req.body);
+    res.status(response.status).json(response).end();
+  } catch (error) {
+    next(error);
+  }
+};
+const updatePassword = async (req, res, next) => {
+  try {
+    req.body.id = await req.id;
+    const response = await pembimbingService.updatePassword(req.body);
+    res.status(response.status).json(response).end();
+  } catch (error) {
+    next(error);
+  }
+};
+export default {
+  create,
+  login,
+  tokenVerify,
+  profile,
+  getAllPublic,
+  count,
+  updatePassword,
+  updateProfile,
+};

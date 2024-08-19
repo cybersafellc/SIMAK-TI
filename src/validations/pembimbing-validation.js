@@ -14,6 +14,21 @@ const login = Joi.object({
   password: Joi.string().required(),
 });
 
+const updateProfile = Joi.object({
+  id: Joi.string().required(),
+  nama: Joi.string().optional(),
+  no_hp: Joi.string().optional(),
+  nidn: Joi.string().optional(),
+  jabatan: Joi.string().optional(),
+  email: Joi.string().optional(),
+});
+
+const updatePassword = Joi.object({
+  id: Joi.string().required(),
+  curent_password: Joi.string().required(),
+  new_password: Joi.string().required(),
+});
+
 const tokenVerify = Joi.object({
   id: Joi.string().required(),
   role: Joi.string().required(),
@@ -28,4 +43,17 @@ const getAllPublic = Joi.object({
   search: Joi.string().optional(),
 });
 
-export default { create, login, tokenVerify, profile, getAllPublic };
+const getById = Joi.object({
+  id: Joi.string().required(),
+});
+
+export default {
+  create,
+  login,
+  tokenVerify,
+  profile,
+  getAllPublic,
+  getById,
+  updatePassword,
+  updateProfile,
+};

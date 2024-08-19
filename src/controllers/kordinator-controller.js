@@ -53,4 +53,32 @@ const count = async (req, res, next) => {
     next(error);
   }
 };
-export default { create, login, profile, getAll, tokenVerify, count };
+const updateProfile = async (req, res, next) => {
+  try {
+    req.body.id = await req.id;
+    const response = await kordinatorService.updateProfile(req.body);
+    res.status(response.status).json(response).end();
+  } catch (error) {
+    next(error);
+  }
+};
+const updatePassword = async (req, res, next) => {
+  try {
+    req.body.id = await req.id;
+    const response = await kordinatorService.updatePassword(req.body);
+    res.status(response.status).json(response).end();
+  } catch (error) {
+    next(error);
+  }
+};
+
+export default {
+  create,
+  login,
+  profile,
+  getAll,
+  tokenVerify,
+  count,
+  updateProfile,
+  updatePassword,
+};

@@ -24,11 +24,22 @@ router.get(
   authMiddelware.kordinator,
   kordinatorController.profile
 );
+router.put(
+  "/kordinators/profile",
+  authMiddelware.kordinator,
+  kordinatorController.updateProfile
+);
+router.put(
+  "/kordinators/password",
+  authMiddelware.kordinator,
+  kordinatorController.updatePassword
+);
 router.get(
   "/kordinators",
   authMiddelware.kordinator,
   kordinatorController.getAll
 );
+
 // mahasiswa
 router.post("/mahasiswa", mahasiswaController.create);
 router.post("/mahasiswa/login", mahasiswaController.login);
@@ -59,6 +70,16 @@ router.get(
   "/pembimbing/profile",
   authMiddelware.pembimbing,
   pembimbingController.profile
+);
+router.put(
+  "/pembimbing/profile",
+  authMiddelware.pembimbing,
+  pembimbingController.updateProfile
+);
+router.put(
+  "/pembimbing/password",
+  authMiddelware.pembimbing,
+  pembimbingController.updatePassword
 );
 
 // kp

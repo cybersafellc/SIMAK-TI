@@ -216,3 +216,9 @@
 {"level":"info","message":"Server Running on Port : 3001","timestamp":"2024-08-18T14:56:47.539Z"}
 {"level":"info","message":"Starting a mysql pool with 13 connections.","target":"quaint::pooled","timestamp":"2024-08-18T14:56:52.839Z"}
 {"level":"info","message":{"duration":0,"params":"[]","query":"SELECT COUNT(*) FROM (SELECT `new_db_umri`.`kordinator`.`id` FROM `new_db_umri`.`kordinator` WHERE 1=1) AS `sub`","target":"quaint::connector::metrics","timestamp":"2024-08-18T14:56:52.846Z"},"timestamp":"2024-08-18T14:56:52.846Z"}
+{"level":"info","message":"Server Running on Port : 3001","timestamp":"2024-08-18T14:57:07.845Z"}
+{"level":"info","message":"Starting a mysql pool with 13 connections.","target":"quaint::pooled","timestamp":"2024-08-18T14:57:46.878Z"}
+{"level":"info","message":{"duration":0,"params":"[]","query":"SELECT COUNT(*) FROM (SELECT `new_db_umri`.`kordinator`.`id` FROM `new_db_umri`.`kordinator` WHERE 1=1) AS `sub`","target":"quaint::connector::metrics","timestamp":"2024-08-18T14:57:46.883Z"},"timestamp":"2024-08-18T14:57:46.883Z"}
+{"level":"info","message":{"duration":0,"params":"[]","query":"SELECT 1","target":"quaint::connector::metrics","timestamp":"2024-08-18T15:02:23.921Z"},"timestamp":"2024-08-18T15:02:23.921Z"}
+{"level":"info","message":{"duration":0,"params":"[]","query":"SELECT COUNT(*) FROM (SELECT `new_db_umri`.`kordinator`.`id` FROM `new_db_umri`.`kordinator` WHERE 1=1) AS `sub`","target":"quaint::connector::metrics","timestamp":"2024-08-18T15:02:23.922Z"},"timestamp":"2024-08-18T15:02:23.922Z"}
+{"level":"info","message":{"duration":0,"params":"[]","query":"SELECT COUNT(*) FROM (SELECT `new_db_umri`.`kordinator`.`id` FROM `new_db_umri`.`kordinator` WHERE 1=1) AS `sub`","target":"quaint::connector::metrics","timestamp":"2024-08-18T15:02:24.444Z"},"timestamp":"2024-08-18T15:02:24.445Z"}

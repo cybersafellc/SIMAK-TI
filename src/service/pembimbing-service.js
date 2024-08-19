@@ -125,8 +125,89 @@ const getAllPublic = async (request) => {
 
   return new Response(200, "list pembimbing", pembimbings, null, false);
 };
+
 const count = async () => {
   const count = await database.pembimbing.count();
   return await new Response(200, "berhasil menghitung", count, null, false);
 };
-export default { create, login, tokenVerify, profile, getAllPublic, count };
+
+const getById = async (request) => {
+  const result = await validation(pembimbingValidation.getById, request);
+  const pembimbing = await database.pembimbing.findUnique({
+    where: result,
+  });
+  if (!pembimbing)
+    throw new ResponseError(400, "tidak ada pembimbing dengan id:" + result.id);
+  return new Response(
+    200,
+    "pembimbing id:" + result.id,
+    pembimbing,
+    null,
+    false
+  );
+};
+
+const updateProfile = async (request) => {
+  const result = await validation(pembimbingValidation.updateProfile, request);
+  result.username = result.nidn;
+  const count = await database.pembimbing.count({
+    where: {
+      id: result.id,
+    },
+  });
+  if (!count)
+    throw new ResponseError(400, "tidak ada pembimbing dengan id:" + result.id);
+  await database.pembimbing.update({
+    data: result,
+    where: {
+      id: result.id,
+    },
+  });
+  return new Response(200, "berhasil mengupdate profile", result, null, false);
+};
+
+const updatePassword = async (request) => {
+  const result = await validation(pembimbingValidation.updatePassword, request);
+  const pembimbing = await database.pembimbing.findUnique({
+    where: {
+      id: result.id,
+    },
+  });
+  if (
+    pembimbing &&
+    (await bcrypt.compare(result.curent_password, pembimbing.password))
+  ) {
+    result.new_password = await bcrypt.hash(result.new_password, 10);
+    const respUpdate = await database.pembimbing.update({
+      data: {
+        password: result.new_password,
+      },
+      where: {
+        id: result.id,
+      },
+      select: {
+        id: true,
+      },
+    });
+    return new Response(
+      200,
+      "berhasil mengupdate password",
+      respUpdate,
+      null,
+      false
+    );
+  }
+  throw new ResponseError(400, "current password salah!");
+};
+
+export default {
+  create,
+  login,
+  tokenVerify,
+  profile,
+  getAllPublic,
+  count,
+  getById,
+  updateProfile,
+  updatePassword,
+};
