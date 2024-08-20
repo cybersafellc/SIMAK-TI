@@ -135,6 +135,13 @@ const getById = async (request) => {
   const result = await validation(pembimbingValidation.getById, request);
   const pembimbing = await database.pembimbing.findUnique({
     where: result,
+    select: {
+      id: true,
+      nama: true,
+      nidn: true,
+      email: true,
+      status: true,
+    },
   });
   if (!pembimbing)
     throw new ResponseError(400, "tidak ada pembimbing dengan id:" + result.id);
@@ -157,6 +164,13 @@ const updateProfile = async (request) => {
   });
   if (!count)
     throw new ResponseError(400, "tidak ada pembimbing dengan id:" + result.id);
+  const countUsername = await database.pembimbing.count({
+    where: {
+      username: result.nidn,
+    },
+  });
+  if (countUsername)
+    throw new ResponseError(400, `nidn ${result.nidn} sudah ada!`);
   await database.pembimbing.update({
     data: result,
     where: {
