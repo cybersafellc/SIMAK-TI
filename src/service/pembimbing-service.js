@@ -156,7 +156,6 @@ const getById = async (request) => {
 
 const updateProfile = async (request) => {
   const result = await validation(pembimbingValidation.updateProfile, request);
-  result.username = result.nidn;
   const count = await database.pembimbing.count({
     where: {
       id: result.id,
@@ -164,13 +163,6 @@ const updateProfile = async (request) => {
   });
   if (!count)
     throw new ResponseError(400, "tidak ada pembimbing dengan id:" + result.id);
-  const countUsername = await database.pembimbing.count({
-    where: {
-      username: result.nidn,
-    },
-  });
-  if (countUsername)
-    throw new ResponseError(400, `nidn ${result.nidn} sudah ada!`);
   await database.pembimbing.update({
     data: result,
     where: {

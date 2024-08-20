@@ -146,7 +146,6 @@ const count = async () => {
 
 const updateProfile = async (request) => {
   const result = await validation(kordinatorValidation.updateProfile, request);
-  result.username = result.nidn;
   const count = await database.kordinator.count({
     where: {
       id: result.id,
@@ -154,13 +153,6 @@ const updateProfile = async (request) => {
   });
   if (!count)
     throw new ResponseError(400, "tidak ada kordinator dengan id:" + result.id);
-  const countUsername = await database.kordinator.count({
-    where: {
-      username: result.nidn,
-    },
-  });
-  if (countUsername)
-    throw new ResponseError(400, `nidn ${result.nidn} sudah ada!`);
   await database.kordinator.update({
     data: result,
     where: {
