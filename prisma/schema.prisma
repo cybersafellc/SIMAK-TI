@@ -152,7 +152,7 @@ model kerja_praktek_disetujui {
 
 model seminar {
   id                String   @id @default(uuid()) @db.VarChar(100)
-  bukti_acc_pembimbing String @db.VarChar(255)
+  bukti_acc_pembimbing String? @db.VarChar(255)
   mahasiswa_id      String   @db.VarChar(100)
   jenis_seminar     String?  @db.VarChar(100)
   details_seminar   String?  @db.VarChar(100)
