@@ -2,6 +2,7 @@ import Joi from "joi";
 
 const createSempro = Joi.object({
   mahasiswa_id: Joi.string().required(),
+  bukti_acc_pembimbing: Joi.string().required(),
 });
 
 const setujuiSempro = Joi.object({
@@ -38,6 +39,7 @@ const penilaian = Joi.object({
 
 const createSemhas = Joi.object({
   mahasiswa_id: Joi.string().required(),
+  bukti_acc_pembimbing: Joi.string().required(),
 });
 
 const setujuiSemhas = Joi.object({

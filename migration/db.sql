@@ -123,6 +123,7 @@ CREATE TABLE kerja_praktek_disetujui (
 CREATE TABLE seminar (
   id VARCHAR(100) PRIMARY KEY,
   mahasiswa_id VARCHAR(100),
+  bukti_acc_pembimbing VARCHAR(255),
   jenis_seminar VARCHAR(100),
   details_seminar VARCHAR(100),
   tanggal_seminar DATE,

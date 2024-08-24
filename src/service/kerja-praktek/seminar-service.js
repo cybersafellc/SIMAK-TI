@@ -9,7 +9,10 @@ const create = async (request) => {
   const result = await validation(seminarValidation.create, request);
   //   validasi apakah sudah mengajukan seminar kp
   const count = await database.seminar.count({
-    where: result,
+    where: {
+      mahasiswa_id: result.mahasiswa_id,
+      jenis_seminar: "kp",
+    },
   });
   if (count)
     throw new ResponseError(
@@ -19,7 +22,10 @@ const create = async (request) => {
   //   validasi pengajuan kp dipastikan sudah di ajukan dan diterima statusnya
   result.status = "diterima";
   const pengajuan_kp = await database.pengajuan_kp.findFirst({
-    where: result,
+    where: {
+      mahasiswa_id: result.mahasiswa_id,
+      status: "diterima",
+    },
     select: {
       id: true,
     },
@@ -49,6 +55,7 @@ const create = async (request) => {
   dataSeminar.jenis_seminar = "kp";
   dataSeminar.details_seminar = kerja_praktek_disetujui.id;
   dataSeminar.status = "menunggu";
+  dataSeminar.bukti_acc_pembimbing = result.bukti_acc_pembimbing;
 
   const createSeminar = await database.seminar.create({
     data: dataSeminar,

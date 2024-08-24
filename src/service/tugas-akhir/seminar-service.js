@@ -20,6 +20,9 @@ const createSempro = async (request) => {
       mahasiswa_id: result.mahasiswa_id,
       status: "diterima",
     },
+    select: {
+      id: true,
+    },
   });
   if (!pengajuanTa)
     throw new ResponseError(
@@ -41,6 +44,7 @@ const createSempro = async (request) => {
       jenis_seminar: "sempro",
       details_seminar: tugasAkhirDisetujui.id,
       status: "menunggu",
+      bukti_acc_pembimbing: result.bukti_acc_pembimbing,
     },
   });
   return new Response(

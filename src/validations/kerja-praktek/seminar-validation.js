@@ -2,6 +2,7 @@ import Joi from "joi";
 
 const create = Joi.object({
   mahasiswa_id: Joi.string().required(),
+  bukti_acc_pembimbing: Joi.string().required(),
 });
 
 const disetujui = Joi.object({
